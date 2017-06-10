@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import nl.hu.ipass.gameHistory.model.Ronde;
 import nl.hu.ipass.gameHistory.model.Spel;
+import nl.hu.ipass.gameHistory.model.Speler;
 
 @Path("/spellen")
 public class SpelResource {
@@ -58,22 +59,35 @@ public class SpelResource {
 		SpelService service = ServiceProvider.getSpelService();
 		Spel spelObj = service.getSpel(id);
 		JsonArrayBuilder rJab = Json.createArrayBuilder();		
+		JsonArrayBuilder sJab = Json.createArrayBuilder();
 		
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		JsonObjectBuilder rJob = Json.createObjectBuilder();
+		JsonObjectBuilder sJob = Json.createObjectBuilder();
+		
 		job.add("id_spel", spelObj.getId_spel());
 		job.add("naam", spelObj.getNaam());
 		job.add("Instructies", spelObj.getInstructies());
 		for(Ronde r : spelObj.getRondes()){
+			
 			rJob.add("id_ronde", r.getId_ronde());
 			rJob.add("winnaar", r.getWinnaar().getNaam());
 			rJob.add("tijdUren", r.getTijd().getHours());
 			rJob.add("tijdMinuten", r.getTijd().getMinutes());
 			rJob.add("tijdSecondes", r.getTijd().getSeconds());
 			rJob.add("notities", r.getNotities());
-			rJab.add(rJob);
 			
+			for(Speler s: r.getDeelnemers()){
+				
+				sJob.add("id_speler",s.getId_speler());
+				sJob.add("naam", s.getNaam());
+				sJab.add(sJob);
+			}
+			
+			rJob.add("Spelers", sJab);
+			rJab.add(rJob);
 		}
+		
 		job.add("Rondes", rJab);
 		
 		return job.build().toString();

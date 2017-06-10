@@ -43,6 +43,7 @@ public class RondeResource {
 				
 				sJab.add(sJob);
 			}
+			
 			job.add("Spelers", sJab);
 			jab.add(job);
 		}

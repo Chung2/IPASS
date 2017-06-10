@@ -48,7 +48,6 @@ public class SpelerDAO extends BaseDAO {
 	public Speler getSpeler(int id) throws SQLException {
 		Connection con = super.getConnection();
 
-		System.out.println("getSpelerId= "+id);
 		Speler speler = null;
 		String querySelect = "SELECT id_speler,naam, wachtwoord FROM Speler WHERE id_speler = ?";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
@@ -81,7 +80,6 @@ public class SpelerDAO extends BaseDAO {
 	
 	public Speler getWinnaarByRondeId(int id)throws SQLException{
 		Connection con = super.getConnection();
-		System.out.println("getWinnaarID (rondeID) ="+id);
 		Speler winnaar = null;
 		String querySelect = "SELECT winnaar from resultaat where id_ronde = ? limit 1";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
@@ -89,7 +87,6 @@ public class SpelerDAO extends BaseDAO {
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()){
 			winnaar = getSpeler(id);
-			System.out.println("naam ="+ winnaar.getNaam());
 		}
 		con.close();
 		return winnaar;

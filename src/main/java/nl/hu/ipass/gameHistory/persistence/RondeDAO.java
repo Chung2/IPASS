@@ -38,7 +38,7 @@ public class RondeDAO extends BaseDAO {
 
 		
 		Ronde ronde = null;
-		String querySelect = "SELECT o.id_ronde,o.id_spel,o.tijd,o.notities,r.winnaar FROM resultaat r JOIN ronde o ON r.id_ronde = o.id_ronde where o.id_ronde = ?";
+		String querySelect = "SELECT o.id_ronde,o.id_spel,o.tijd,o.notities FROM ronde o WHERE o.id_ronde = ?";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
@@ -46,7 +46,7 @@ public class RondeDAO extends BaseDAO {
 		while(rs.next()){
 			ronde = new Ronde(rs.getInt("id_ronde"), speldao.spelById(rs.getInt("id_spel")),
 					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTimestamp("tijd"),
-					spelerdao.getSpeler(rs.getInt("winnaar")), rs.getString("notities"));
+					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
 		con.close();
 		return ronde;
@@ -58,7 +58,7 @@ public class RondeDAO extends BaseDAO {
 		SpelerDAO spelerdao = new SpelerDAO();
 
 		ArrayList<Ronde> rondes = new ArrayList<Ronde>();
-		String querySelect = "SELECT o.id_ronde,o.id_spel,o.tijd,o.notities,r.winnaar FROM ronde o JOIN resultaat r ON o.id_ronde = r.id_ronde WHERE id_spel = ?";
+		String querySelect = "SELECT o.id_ronde,o.id_spel,o.tijd,o.notities FROM ronde o WHERE id_spel = ?";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
