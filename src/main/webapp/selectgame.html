@@ -4,16 +4,26 @@
     <meta charset="utf-8">
     <title>Selecteer spel</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script>
+     $(document).ready(function(){
+       $.getJSON("./rest/spellen",function(spellenData){           
+           $.each(spellenData, function(v, n) {
+               var $options = $("<option/>").attr("value",n.id_spel).text(n.naam);
+          	$("#spellen").append($options);
+          	});
+          });
+     });
+     </script>
   </head>
   <body>
     <div id="spellenSelecterenContainer">
     <h1>Offline game History</h1>
     <div id="spellenSelecteren">
     <select id="spellen" name="spellen">
-      <option>Kies een spel!</option>
-      <option>Pesten</option>
     </select>
     div spellenSelecteren
+    </div>
+    <div id="instructies">
     </div>
     <div id ="submitSpelButton">
     <button type="button" name="spelSelecterenButton" id="spelSelecterenButton">Volgende</button>
@@ -21,6 +31,7 @@
     </div>
   </div>
   <script src="./js/javascript.js">
+
   </script>
   </body>
 </html>

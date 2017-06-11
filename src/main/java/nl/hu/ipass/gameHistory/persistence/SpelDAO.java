@@ -37,7 +37,7 @@ public class SpelDAO extends BaseDAO {
 		RondeDAO rondeDAO = new RondeDAO();
 
 		Spel spel = null;
-		String selectQuery = "SELECT id_spel,naam, instructies FROM spel WHERE ?";
+		String selectQuery = "SELECT id_spel,naam, instructies FROM spel WHERE id_spel = ?";
 		PreparedStatement stmt = con.prepareStatement(selectQuery);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();

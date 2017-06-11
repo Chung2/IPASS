@@ -55,9 +55,9 @@ public class SpelResource {
 	@Produces("application/json")
 	public String getSpel(@PathParam("id") int id) throws SQLException{
 		
-		Spel spel = null;
 		SpelService service = ServiceProvider.getSpelService();
 		Spel spelObj = service.getSpel(id);
+		
 		JsonArrayBuilder rJab = Json.createArrayBuilder();		
 		JsonArrayBuilder sJab = Json.createArrayBuilder();
 		

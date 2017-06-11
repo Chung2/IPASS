@@ -53,3 +53,9 @@ $("#rondeOpslaanButton").click(function(){
     setTimeout(function(){window.location.href = "/gameHistory/menu.html"},2000);
   }
 })
+
+$("#spellen").change(function(){
+	$.getJSON("./rest/spellen/"+this.value,function(spellenData){
+		$("#instructies").html(spellenData.Instructies);
+        })
+})
