@@ -31,6 +31,7 @@ public class RondeResource {
 
 			job.add("id_ronde", r.getId_ronde());
 			job.add("spel", r.getSpel().getNaam());
+			job.add("naam", r.getNaam());
 			job.add("tijdUren", r.getTijd().getHours());
 			job.add("tijdMinuten", r.getTijd().getMinutes());
 			job.add("tijdSecondes", r.getTijd().getSeconds());
@@ -67,6 +68,7 @@ public class RondeResource {
 		
 		job.add("id_ronde", rondeObj.getId_ronde());
 		job.add("spel", rondeObj.getSpel().getNaam());
+		job.add("naam", rondeObj.getNaam());
 		job.add("tijdUren", rondeObj.getTijd().getHours());
 		job.add("tijdMinuten", rondeObj.getTijd().getMinutes());
 		job.add("tijdSecondes", rondeObj.getTijd().getSeconds());

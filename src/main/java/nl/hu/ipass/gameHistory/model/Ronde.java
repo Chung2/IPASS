@@ -7,14 +7,16 @@ import java.util.ArrayList;
 public class Ronde {
 	
 	private int id_ronde;
+	private String naam;
 	private Spel spel;
 	private ArrayList<Speler> deelnemers;
 	private Timestamp tijd;
 	private Speler winnaar;
 	private String notities;
 	
-	public Ronde(int id_ronde, Spel spel, ArrayList<Speler> deelnemers, Timestamp tijd, Speler winnaar,String notities) {
+	public Ronde(int id_ronde, Spel spel,String naam, ArrayList<Speler> deelnemers, Timestamp tijd, Speler winnaar,String notities) {
 		super();
+		this.naam = naam;
 		this.id_ronde = id_ronde;
 		this.spel = spel;
 		this.deelnemers = deelnemers;
@@ -37,6 +39,14 @@ public class Ronde {
 
 	public void setSpel(Spel spel) {
 		this.spel = spel;
+	}
+
+	public String getNaam() {
+		return naam;
+	}
+
+	public void setNaam(String naam) {
+		this.naam = naam;
 	}
 
 	public ArrayList<Speler> getDeelnemers() {

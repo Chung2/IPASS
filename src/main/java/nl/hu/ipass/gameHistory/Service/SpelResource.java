@@ -71,6 +71,7 @@ public class SpelResource {
 		for(Ronde r : spelObj.getRondes()){
 			
 			rJob.add("id_ronde", r.getId_ronde());
+			rJob.add("naam", r.getNaam());
 			rJob.add("winnaar", r.getWinnaar().getNaam());
 			rJob.add("tijdUren", r.getTijd().getHours());
 			rJob.add("tijdMinuten", r.getTijd().getMinutes());
