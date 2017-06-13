@@ -11,7 +11,7 @@ $("#rondeNaamButton").click(function() {
   var rondeNaam = $("#nieuwRondeNaam").val();
   var bestaandeNamen = [];
 
-  if ($("#nieuwRondeNaam").val() === "") {
+  if (rondeNaam === "") {
     alert("Voer een naam voor de ronde in!");
   } else {
     $.getJSON("./rest/rondes/", function(rondeData) {
@@ -20,7 +20,7 @@ $("#rondeNaamButton").click(function() {
       })
       for (var i = 0; i < bestaandeNamen.length; i++) {
         if (bestaandeNamen[i] === rondeNaam) {
-          alert("Hij bestaat al	");
+          alert("De ronde"+ rondeNaam +" bestaat al	");
           bestaat = true;
           break;
         }
@@ -29,13 +29,13 @@ $("#rondeNaamButton").click(function() {
         window.location.href = "/gameHistory/selectgame.html";
       }
     });
-
   }
 });
 
 $("#spelSelecterenButton").click(function() {
-  if ($("#spellen").val() === "Kies een spel!") {
-    alert("Ongeschikt spel!");
+  var gekozenSpel = $("#spellen").val();
+  if (gekozenSpel === "Kies een spel!") {
+    alert("Geen geldige spel!");
   } else {
     window.location.href = "/gameHistory/selectplayers.html";
   }
@@ -107,3 +107,32 @@ $("#searchBarWinnaars").keyup(function() {
     }
   }
 })
+
+$("#toevoegenGameButton").click(function(){
+
+var nieuwSpel = $("#GameNaam").val();
+var nieuwInstructies = $("#gameInstructies").val();
+var bestaandeSpellen = [];
+var bestaat = false;
+
+if (nieuwSpel === "") {
+  alert("Voer een naam voor het spel in!");
+} else {
+  $.getJSON("./rest/spellen/", function(spellenData) {
+    $.each(spellenData, function(v, n) {
+      bestaandeSpellen.push(n.naam);
+    })
+    for (var i = 0; i < bestaandeSpellen.length; i++) {
+      if (bestaandeSpellen[i] === nieuwSpel) {
+        alert("Het spel "+ nieuwSpel+" bestaat al	");
+        bestaat = true;
+        break;
+      }
+    }
+    if (!bestaat) {
+      alert("Het spel "+ nieuwSpel +" is toegevoegd!");
+      //window.location.href = "/gameHistory/selectgame.html";
+    }
+  });
+}
+});
