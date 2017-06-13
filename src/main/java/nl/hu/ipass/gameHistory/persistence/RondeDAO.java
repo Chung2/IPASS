@@ -24,14 +24,12 @@ public class RondeDAO extends BaseDAO {
 		
 		while(rs.next()){
 			rondes.add(new Ronde(rs.getInt("id_ronde"), speldao.spelById(rs.getInt("id_spel")),rs.getString("naam"),
-					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTimestamp("tijd"),
+					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
 		con.close();
 		return rondes;
 	}
-	
-	
 
 	public Ronde rondeById(int id) throws SQLException{
 		Connection con = super.getConnection();
@@ -47,7 +45,7 @@ public class RondeDAO extends BaseDAO {
 		
 		while(rs.next()){
 			ronde = new Ronde(rs.getInt("id_ronde"), speldao.spelById(rs.getInt("id_spel")),rs.getString("naam"),
-					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTimestamp("tijd"),
+					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
 		con.close();
@@ -67,7 +65,7 @@ public class RondeDAO extends BaseDAO {
 		
 		while(rs.next()){
 			ronde = new Ronde(rs.getInt("id_ronde"), speldao.spelById(rs.getInt("id_spel")),rs.getString("naam"),
-					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTimestamp("tijd"),
+					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
 		con.close();
@@ -87,7 +85,7 @@ public class RondeDAO extends BaseDAO {
 
 		while (rs.next()) {
 			rondes.add(new Ronde(rs.getInt("id_ronde"), speldao.spelByIdForRonde(rs.getInt("id_spel")),rs.getString("naam"),
-					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTimestamp("tijd"),
+					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
 		con.close();
@@ -109,5 +107,10 @@ public class RondeDAO extends BaseDAO {
 		con.close();
 		return rondes;
 	}
+	/*
+	public boolean nieuwRonde(Ronde ronde){
+		
+		
+	}*/
 
 }

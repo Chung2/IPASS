@@ -1,4 +1,3 @@
-
 //functies onclick
 
 //menu speler
@@ -11,11 +10,11 @@ $("#geschiedenisButton").click(function() {
 })
 
 //menu admin
-$("#verwijderenButton").click(function(){
+$("#verwijderenButton").click(function() {
   window.location.href = "/gameHistory/admin/deletegame.html"
 })
 
-$("#nieuwSpelButton").click(function(){
+$("#nieuwSpelButton").click(function() {
   window.location.href = "/gameHistory/admin/addgame.html"
 })
 
@@ -34,12 +33,16 @@ $("#rondeNaamButton").click(function() {
       })
       for (var i = 0; i < bestaandeNamen.length; i++) {
         if (bestaandeNamen[i] === rondeNaam) {
-          alert("De ronde"+ rondeNaam +" bestaat al	");
+          alert("De ronde" + rondeNaam + " bestaat al	");
           bestaat = true;
           break;
         }
       }
       if (!bestaat) {
+        var dataRonde = {
+          "naam": rondeNaam
+        }
+        sessionStorage.setItem("nieuwRonde", JSON.stringify(dataRonde));
         window.location.href = "/gameHistory/selectgame.html";
       }
     });
@@ -52,6 +55,13 @@ $("#spelSelecterenButton").click(function() {
   if (gekozenSpel === "Kies een spel!") {
     alert("Geen geldige spel!");
   } else {
+    var spel = {
+      "spel": gekozenSpel
+    };
+    var rondeObj = JSON.parse(sessionStorage.getItem("nieuwRonde"));
+    var fusionObj = jQuery.extend(rondeObj, spel);
+    sessionStorage.removeItem("nieuwRonde");
+    sessionStorage.setItem("nieuwRonde", JSON.stringify(fusionObj));
     window.location.href = "/gameHistory/selectplayers.html";
   }
 })
@@ -65,10 +75,35 @@ $("#selecterenSpelersButton").click(function() {
   if (!speler1 || !speler2 || !speler3 || speler1 == "Geen speler") {
     alert("geen geldige spelers!");
   } else {
-
+    var dataSpelers = {
+      "speler1": speler1,
+      "speler2": speler2,
+      "speler3": speler3
+    }
+    var rondeObj = JSON.parse(sessionStorage.getItem("nieuwRonde"));
+    var fusionObj = jQuery.extend(rondeObj, dataSpelers);
+    var JSONdata = JSON.stringify(fusionObj);
+    console.log(JSONdata);
+    var uri = "./rest/rondes"
     var bevestiging = confirm("Weet je zeker dat je de ronde wilt starten?");
     if (bevestiging == true) {
-      window.location.href = "/gameHistory/round.html";
+      $.ajax(uri, {
+        method: "POST",
+        data: JSONdata,
+        //  beforeSend: function(xhr){
+        //    var token = window.sessionStorage.getItem("sessionToken");
+        //    xhr.setRequestHeader('Authorization','Bearer' +token);
+        //  },
+        success: function(response) {
+          console.log("Success!");
+          sessionStorage.removeItem("nieuwRonde");
+        },
+        error: function(response) {
+          console.log("Error!");
+        }
+      });
+
+      //window.location.href = "/gameHistory/round.html";
     }
   }
 })
@@ -102,71 +137,70 @@ $("#rondeOpslaanButton").click(function() {
 })
 
 //pagina addgame
-$("#toevoegenGameButton").click(function(){
+$("#toevoegenGameButton").click(function() {
 
-var nieuwSpel = $("#GameNaam").val();
-var nieuwInstructies = $("#gameInstructies").val();
-var bestaandeSpellen = [];
-var bestaat = false;
+  var nieuwSpel = $("#GameNaam").val();
+  var nieuwInstructies = $("#gameInstructies").val();
+  var bestaandeSpellen = [];
+  var bestaat = false;
 
-if (nieuwSpel === "") {
-  alert("Voer een naam voor het spel in!");
-} else {
-  $.getJSON("../rest/spellen/", function(spellenData) {
-    $.each(spellenData, function(v, n) {
-      bestaandeSpellen.push(n.naam);
-    })
-    for (var i = 0; i < bestaandeSpellen.length; i++) {
-      if (bestaandeSpellen[i] === nieuwSpel) {
-        alert("Het spel "+ nieuwSpel+" bestaat al	");
-        bestaat = true;
-        break;
+  if (nieuwSpel === "") {
+    alert("Voer een naam voor het spel in!");
+  } else {
+    $.getJSON("../rest/spellen/", function(spellenData) {
+      $.each(spellenData, function(v, n) {
+        bestaandeSpellen.push(n.naam);
+      })
+      for (var i = 0; i < bestaandeSpellen.length; i++) {
+        if (bestaandeSpellen[i] === nieuwSpel) {
+          alert("Het spel " + nieuwSpel + " bestaat al	");
+          bestaat = true;
+          break;
+        }
       }
-    }
-    if (!bestaat) {
-      var data = {
-        "naam":nieuwSpel,
-        "Instructies":nieuwInstructies
-      };
+      if (!bestaat) {
+        var data = {
+          "naam": nieuwSpel,
+          "Instructies": nieuwInstructies
+        };
 
-      var JSONdata = JSON.stringify(data);
-      var uri = "../rest/spellen/"
-    	  console.log(uri);
-     $.ajax(uri, {
-       method: "POST",
-       data: JSONdata,
-      //  beforeSend: function(xhr){
-      //    var token = window.sessionStorage.getItem("sessionToken");
-      //    xhr.setRequestHeader('Authorization','Bearer' +token);
-      //  },
-       success: function(response) {
-         alert("Het spel "+ nieuwSpel +" is toegevoegd!");
-       },
-       error: function(response) {
-         alert("Het spel "+ nieuwSpel +" is niet toegevoegd!");
-       }
-     });
-      //window.location.href = "/gameHistory/selectgame.html";
-    }
-  });
-}
+        var JSONdata = JSON.stringify(data);
+        var uri = "../rest/spellen/"
+        $.ajax(uri, {
+          method: "POST",
+          data: JSONdata,
+          //  beforeSend: function(xhr){
+          //    var token = window.sessionStorage.getItem("sessionToken");
+          //    xhr.setRequestHeader('Authorization','Bearer' +token);
+          //  },
+          success: function(response) {
+            alert("Het spel " + nieuwSpel + " is toegevoegd!");
+          },
+          error: function(response) {
+            alert("Het spel " + nieuwSpel + " is niet toegevoegd!");
+          }
+        });
+        //window.location.href = "/gameHistory/selectgame.html";
+      }
+    });
+  }
 });
 
 //pagina deletegame
-function deleteButton(id,naam){
-  var naamFix =decodeURIComponent(naam);
-  var bevestiging = confirm("Weet je zeker dat je het spel "+naamFix+" wilt verwijderen?");
-  if(bevestiging){
-  var uri = "../rest/spellen/delete/"+id;
-  $.ajax(uri,{
-    method:"DELETE",
-    success:function(response){
-      alert(naamFix+" is verwijderd!");
-    },
-    error: function(response) {
-      alert("Verwijderen is niet gelukt");
-    }
-  });
+function deleteButton(id, naam) {
+  var naamFix = decodeURIComponent(naam);
+  var bevestiging = confirm("Weet je zeker dat je het spel " + naamFix + " wilt verwijderen?");
+  if (bevestiging) {
+    var uri = "../rest/spellen/delete/" + id;
+    $.ajax(uri, {
+      method: "DELETE",
+      success: function(response) {
+        alert(naamFix + " is verwijderd!");
+      },
+      error: function(response) {
+        alert("Verwijderen is niet gelukt");
+      }
+    });
   }
 }
 

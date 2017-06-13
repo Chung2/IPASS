@@ -2,21 +2,28 @@ package nl.hu.ipass.gameHistory.model;
 
 import java.sql.Timestamp;
 import java.sql.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class Ronde {
 	
 	private int id_ronde;
-	private String naam;
+	private String rondenaam;
+	
 	private Spel spel;
 	private ArrayList<Speler> deelnemers;
-	private Timestamp tijd;
+	//private Timestamp tijd;
 	private Speler winnaar;
 	private String notities;
+	private Time tijd;
+
+	public Ronde(int id_ronde, Spel spel,String naam, String naam1 ,String naam2,String naam3, Time tijd,String notities){
+		
+	}
 	
-	public Ronde(int id_ronde, Spel spel,String naam, ArrayList<Speler> deelnemers, Timestamp tijd, Speler winnaar,String notities) {
+	public Ronde(int id_ronde, Spel spel,String naam, ArrayList<Speler> deelnemers, Time tijd, Speler winnaar,String notities) {
 		super();
-		this.naam = naam;
+		this.rondenaam = naam;
 		this.id_ronde = id_ronde;
 		this.spel = spel;
 		this.deelnemers = deelnemers;
@@ -42,11 +49,11 @@ public class Ronde {
 	}
 
 	public String getNaam() {
-		return naam;
+		return rondenaam;
 	}
 
 	public void setNaam(String naam) {
-		this.naam = naam;
+		this.rondenaam = naam;
 	}
 
 	public ArrayList<Speler> getDeelnemers() {
@@ -57,11 +64,11 @@ public class Ronde {
 		this.deelnemers = deelnemers;
 	}
 
-	public Timestamp getTijd() {
+	public Time getTijd() {
 		return tijd;
 	}
 
-	public void setTijd(Timestamp tijd) {
+	public void setTijd(Time tijd) {
 		this.tijd = tijd;
 	}
 

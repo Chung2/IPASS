@@ -1,17 +1,26 @@
 package nl.hu.ipass.gameHistory.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import nl.hu.ipass.gameHistory.model.Ronde;
+import nl.hu.ipass.gameHistory.model.Spel;
 import nl.hu.ipass.gameHistory.model.Speler;
 
 @Path("/rondes")
@@ -123,6 +132,29 @@ public class RondeResource {
 		return job.build().toString();
 		
 	}
+	
+	/*@POST
+	@Produces("application/json")
+	public Response addRonde(InputStream is) throws SQLException, IOException {
 
+		RondeService service = ServiceProvider.getRondeService();
+		JsonObject object = Json.createReader(is).readObject();
+		
+		String naam = object.getString("naam");
+		int spel = object.getInt("spel");
+		String spelernaam1 = object.getString("speler1");
+		String spelernaam2 = object.getString("speler2");
+		String spelernaam3 = object.getString("speler3");
+		
+//		String tijd = "00:00:00"; 
+//		DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+		Time time = new Time(00,00,00);
+		
+		Ronde nieuwRonde = new Ronde(666, null, naam, null, time, , null);
+		service.addSpel(nieuwRonde);
+
+		return Response.ok().build();
+	}
+*/
 
 }
