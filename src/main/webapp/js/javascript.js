@@ -58,6 +58,11 @@ $("#selecterenSpelersButton").click(function() {
 })
 
 $("#rondeSluitenButton").click(function() {
+  var tijd = $("#stopWatchTijd h3").html();
+  var uren = tijd.slice(0,2);
+  var minuten = tijd.slice(3,5);
+  var secondes = tijd.slice(6,8);
+
   var bevestiging = confirm("weet je zeker dat je de ronde wilt afsluiten?");
   if (bevestiging == true) {
     window.location.href = "/gameHistory/postround.html";

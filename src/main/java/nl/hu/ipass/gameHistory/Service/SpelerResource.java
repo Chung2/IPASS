@@ -24,6 +24,7 @@ public class SpelerResource {
 
 		SpelerService service = ServiceProvider.getSpelerService();
 
+		JsonObjectBuilder rJob = Json.createObjectBuilder();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 		JsonArrayBuilder rJab = Json.createArrayBuilder();
 
@@ -33,7 +34,9 @@ public class SpelerResource {
 			job.add("naam", spelerObj.getNaam());
 			job.add("wachtwoord", spelerObj.getWachtwoord());
 			for (Integer r : spelerObj.getRondes()) {
-				rJab.add(r);
+				rJob.add("id_ronde", r);
+				
+				rJab.add(rJob);
 			}
 			job.add("rondes", rJab);
 			jab.add(job);
@@ -52,13 +55,16 @@ public class SpelerResource {
 
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		JsonArrayBuilder rJab = Json.createArrayBuilder();
+		JsonObjectBuilder rJob = Json.createObjectBuilder();
 		
 		job.add("id_gebruiker", spelerObj.getId_speler());
 		job.add("naam", spelerObj.getNaam());
 		job.add("wachtwoord", spelerObj.getWachtwoord());
 		for (Integer r : spelerObj.getRondes()) {
-			rJab.add(r);
 			
+			rJob.add("id_ronde", r);
+			
+			rJab.add(rJob);
 		}
 		job.add("rondes", rJab);
 		return job.build().toString();

@@ -4,12 +4,27 @@
     <meta charset="utf-8">
     <title>Geschiedenis</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script>
+     $(document).ready(function(){
+       $.getJSON("./rest/rondes/",function(rondeData){
+           $.each(rondeData, function(v, n) {
+               var arraySpelers = [];
+               $.each(n.Spelers, function(a, c) {
+                   arraySpelers.push(c.naam);
+                   });
+              $("#resultaten").append('<tr><td>'+n.id_ronde+'</td><td>'+n.naam+'</td><td>'+n.spel+'</td><td>'+n.tijdUren+":"+n.tijdMinuten+":"+n.tijdSecondes+'</td><td>'+n.winnaar+'</td><td>'+n.notities+'</td><td>'+arraySpelers+'</td><tr>')
+                   });
+          });
+     });
+     </script>
   </head>
   <body>
   <div id="geschiedenis">
   	<h1>Offline game History</h1>
   	<div id="geschiedenisTable">
-  		<table>
+      <input type="text" name="searchBarWinnaars" id="searchBarWinnaars" placeholder="Zoek naar de winnaars!">
+  		<table id = "resultaten">
+        <tr><th> Ronde nummer </th><th> Ronde naam </th><th> Spel </th><th> tijd </th><th> winnaar </th><th> notities </th><th> Deelnemers </th></tr>
   		</table>
   	</div>
   </div>
