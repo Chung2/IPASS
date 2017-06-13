@@ -1,3 +1,7 @@
+
+//functies onclick
+
+//menu speler
 $("#rondeStartenButton").click(function() {
   window.location.href = "/gameHistory/createround.html";
 })
@@ -6,6 +10,16 @@ $("#geschiedenisButton").click(function() {
   window.location.href = "/gameHistory/history.html";
 })
 
+//menu admin
+$("#verwijderenButton").click(function(){
+  window.location.href = "/gameHistory/admin/deletegame.html"
+})
+
+$("#nieuwSpelButton").click(function(){
+  window.location.href = "/gameHistory/admin/addgame.html"
+})
+
+//pagina createround
 $("#rondeNaamButton").click(function() {
   var bestaat = false;
   var rondeNaam = $("#nieuwRondeNaam").val();
@@ -32,6 +46,7 @@ $("#rondeNaamButton").click(function() {
   }
 });
 
+//pagina selectgame
 $("#spelSelecterenButton").click(function() {
   var gekozenSpel = $("#spellen").val();
   if (gekozenSpel === "Kies een spel!") {
@@ -41,6 +56,7 @@ $("#spelSelecterenButton").click(function() {
   }
 })
 
+//pagina selectplayers
 $("#selecterenSpelersButton").click(function() {
   var speler1 = $("#speler1").val();
   var speler2 = $("#speler2").val();
@@ -57,6 +73,7 @@ $("#selecterenSpelersButton").click(function() {
   }
 })
 
+//pagina round
 $("#rondeSluitenButton").click(function() {
   var tijd = $("#stopWatchTijd h3").html();
   var uren = tijd.slice(0, 2);
@@ -69,6 +86,7 @@ $("#rondeSluitenButton").click(function() {
   }
 })
 
+//pagina posround
 $("#rondeOpslaanButton").click(function() {
   var winnaar = $("#winnaar").val();
   var notities = $("textarea#notities").val();
@@ -83,31 +101,7 @@ $("#rondeOpslaanButton").click(function() {
   }
 })
 
-$("#spellen").change(function() {
-  $.getJSON("./rest/spellen/" + this.value, function(spellenData) {
-    $("#instructies").html(spellenData.Instructies);
-  })
-})
-
-$("#searchBarWinnaars").keyup(function() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("searchBarWinnaars");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("resultaten");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[4];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-})
-
+//pagina addgame
 $("#toevoegenGameButton").click(function(){
 
 var nieuwSpel = $("#GameNaam").val();
@@ -136,3 +130,41 @@ if (nieuwSpel === "") {
   });
 }
 });
+
+//pagina deletegame
+function deleteButton(id){
+
+}
+
+
+//functies change
+
+//pagina selectgame
+$("#spellen").change(function() {
+  $.getJSON("./rest/spellen/" + this.value, function(spellenData) {
+    $("#instructies").html(spellenData.Instructies);
+  })
+})
+
+
+//functies keyup
+
+//pagina history
+$("#searchBarWinnaars").keyup(function() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searchBarWinnaars");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("resultaten");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+})

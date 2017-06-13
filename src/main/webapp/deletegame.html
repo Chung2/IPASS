@@ -8,7 +8,7 @@
     $(document).ready(function(){
       $.getJSON("./rest/spellen",function(spellenData){
           $.each(spellenData, function(v, n) {
-             $("#gameTable").append("<tr><td>"+n.id_spel+"</td><td>"+n.naam+"</td><td>"+n.Instructies+"</td><td><button type=button name=button id='"+n.id_spel+"'>"+n.naam+" verwijderen!</button></td></tr>");
+             $("#gameTable").append("<tr><td>"+n.id_spel+"</td><td>"+n.naam+"</td><td>"+n.Instructies+"</td><td><button type=button id=deleteButton name=button onclick=deleteButton("+n.id_spel+")>"+n.naam+" verwijderen!</button></td></tr>");
                   });
          });
     });
