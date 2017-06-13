@@ -10,12 +10,15 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import org.glassfish.jersey.internal.ServiceFinder.ServiceIteratorProvider;
 
 import nl.hu.ipass.gameHistory.model.Ronde;
 import nl.hu.ipass.gameHistory.model.Spel;
@@ -102,7 +105,7 @@ public class SpelResource {
 	
 	@POST
 	@Produces("application/json")
-	public Response addCountry(InputStream is) throws SQLException, IOException {
+	public Response addSpel(InputStream is) throws SQLException, IOException {
 
 		SpelService service = ServiceProvider.getSpelService();
 		JsonObject object = Json.createReader(is).readObject();
@@ -111,10 +114,19 @@ public class SpelResource {
 		String instructies = object.getString("Instructies");
 		
 		Spel nieuwSpel = new Spel(999,naam,instructies);
-		System.out.println(nieuwSpel);
 			
 		service.addSpel(nieuwSpel);
 
+		return Response.ok().build();
+	}
+	
+	@DELETE
+	@Path("/delete/{id}")
+	public Response deleteCountry(@PathParam("id") int id) throws SQLException {
+		SpelService service = ServiceProvider.getSpelService();
+
+		Spel deleteC = service.getSpel(id);
+		service.deleteSpel(deleteC);
 		return Response.ok().build();
 	}
 	

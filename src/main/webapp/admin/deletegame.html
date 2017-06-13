@@ -6,9 +6,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-      $.getJSON("./rest/spellen",function(spellenData){
+      $.getJSON("../rest/spellen",function(spellenData){
           $.each(spellenData, function(v, n) {
-             $("#gameTable").append("<tr><td>"+n.id_spel+"</td><td>"+n.naam+"</td><td>"+n.Instructies+"</td><td><button type=button id=deleteButton name=button onclick=deleteButton("+n.id_spel+")>"+n.naam+" verwijderen!</button></td></tr>");
+            var spelNaam = n.naam;
+            var stringNaam = spelNaam.toString();
+             $("#gameTable").append("<tr><td>"+n.id_spel+"</td><td>"+n.naam+"</td><td>"+n.Instructies+"</td><td><button type=button id=deleteButton name=button onclick=deleteButton("+n.id_spel+",'"+encodeURIComponent(n.naam)+"')>"+n.naam+" verwijderen!</button></td></tr>");
                   });
          });
     });
@@ -26,7 +28,7 @@
        </table>
      </div>
    </div>
-     <script src="./js/javascript.js">
+     <script src="../js/javascript.js">
      </script>
   </body>
 </html>

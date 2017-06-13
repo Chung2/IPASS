@@ -153,8 +153,21 @@ if (nieuwSpel === "") {
 });
 
 //pagina deletegame
-function deleteButton(id){
-
+function deleteButton(id,naam){
+  var naamFix =decodeURIComponent(naam);
+  var bevestiging = confirm("Weet je zeker dat je het spel "+naamFix+" wilt verwijderen?");
+  if(bevestiging){
+  var uri = "../rest/spellen/delete/"+id;
+  $.ajax(uri,{
+    method:"DELETE",
+    success:function(response){
+      alert(naamFix+" is verwijderd!");
+    },
+    error: function(response) {
+      alert("Verwijderen is niet gelukt");
+    }
+  });
+  }
 }
 
 
