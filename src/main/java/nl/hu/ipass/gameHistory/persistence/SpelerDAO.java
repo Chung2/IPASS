@@ -91,4 +91,6 @@ public class SpelerDAO extends BaseDAO {
 		con.close();
 		return winnaar;
 	}
+	
+	
 }

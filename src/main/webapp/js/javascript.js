@@ -112,7 +112,7 @@ var bestaat = false;
 if (nieuwSpel === "") {
   alert("Voer een naam voor het spel in!");
 } else {
-  $.getJSON("./rest/spellen/", function(spellenData) {
+  $.getJSON("../rest/spellen/", function(spellenData) {
     $.each(spellenData, function(v, n) {
       bestaandeSpellen.push(n.naam);
     })
@@ -124,7 +124,28 @@ if (nieuwSpel === "") {
       }
     }
     if (!bestaat) {
-      alert("Het spel "+ nieuwSpel +" is toegevoegd!");
+      var data = {
+        "naam":nieuwSpel,
+        "Instructies":nieuwInstructies
+      };
+
+      var JSONdata = JSON.stringify(data);
+      var uri = "../rest/spellen/"
+    	  console.log(uri);
+     $.ajax(uri, {
+       method: "POST",
+       data: JSONdata,
+      //  beforeSend: function(xhr){
+      //    var token = window.sessionStorage.getItem("sessionToken");
+      //    xhr.setRequestHeader('Authorization','Bearer' +token);
+      //  },
+       success: function(response) {
+         alert("Het spel "+ nieuwSpel +" is toegevoegd!");
+       },
+       error: function(response) {
+         alert("Het spel "+ nieuwSpel +" is niet toegevoegd!");
+       }
+     });
       //window.location.href = "/gameHistory/selectgame.html";
     }
   });

@@ -1,15 +1,21 @@
 package nl.hu.ipass.gameHistory.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import nl.hu.ipass.gameHistory.model.Ronde;
 import nl.hu.ipass.gameHistory.model.Spel;
@@ -92,6 +98,24 @@ public class SpelResource {
 		job.add("Rondes", rJab);
 		
 		return job.build().toString();
+	}
+	
+	@POST
+	@Produces("application/json")
+	public Response addCountry(InputStream is) throws SQLException, IOException {
+
+		SpelService service = ServiceProvider.getSpelService();
+		JsonObject object = Json.createReader(is).readObject();
+		
+		String naam = object.getString("naam");
+		String instructies = object.getString("Instructies");
+		
+		Spel nieuwSpel = new Spel(999,naam,instructies);
+		System.out.println(nieuwSpel);
+			
+		service.addSpel(nieuwSpel);
+
+		return Response.ok().build();
 	}
 	
 

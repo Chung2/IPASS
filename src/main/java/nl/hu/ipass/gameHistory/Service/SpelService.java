@@ -17,4 +17,12 @@ public class SpelService {
 	public Spel getSpel(int id) throws SQLException{
 		return speldao.spelById(id);
 	}
+	
+	public boolean addSpel(Spel spel) throws SQLException{
+		return speldao.insertSpel(spel);
+	}
+	
+	public boolean deleteSpel(Spel spel) throws SQLException{
+		return speldao.deleteSpel(spel);
+	}
 }
