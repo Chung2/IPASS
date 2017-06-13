@@ -59,9 +59,9 @@ $("#selecterenSpelersButton").click(function() {
 
 $("#rondeSluitenButton").click(function() {
   var tijd = $("#stopWatchTijd h3").html();
-  var uren = tijd.slice(0,2);
-  var minuten = tijd.slice(3,5);
-  var secondes = tijd.slice(6,8);
+  var uren = tijd.slice(0, 2);
+  var minuten = tijd.slice(3, 5);
+  var secondes = tijd.slice(6, 8);
 
   var bevestiging = confirm("weet je zeker dat je de ronde wilt afsluiten?");
   if (bevestiging == true) {
@@ -70,7 +70,10 @@ $("#rondeSluitenButton").click(function() {
 })
 
 $("#rondeOpslaanButton").click(function() {
-  if ($("#winnaar").val() === "Kies de winnaar!" || $("#winnaar").val() === "Arnoud") {
+  var winnaar = $("#winnaar").val();
+  var notities = $("textarea#notities").val();
+
+  if (winnaar === "Kies de winnaar!" || winnaar === "Arnoud") {
     alert("Geen geldige winnaar gekozen!");
   } else {
     alert("De ronde wordt nu opgeslagen!");
@@ -84,4 +87,23 @@ $("#spellen").change(function() {
   $.getJSON("./rest/spellen/" + this.value, function(spellenData) {
     $("#instructies").html(spellenData.Instructies);
   })
+})
+
+$("#searchBarWinnaars").keyup(function() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searchBarWinnaars");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("resultaten");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 })
