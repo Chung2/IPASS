@@ -55,9 +55,9 @@ public class SpelResource {
 	@Produces("application/json")
 	public String getSpel(@PathParam("id") int id) throws SQLException{
 		
-		Spel spel = null;
 		SpelService service = ServiceProvider.getSpelService();
 		Spel spelObj = service.getSpel(id);
+		
 		JsonArrayBuilder rJab = Json.createArrayBuilder();		
 		JsonArrayBuilder sJab = Json.createArrayBuilder();
 		
@@ -71,6 +71,7 @@ public class SpelResource {
 		for(Ronde r : spelObj.getRondes()){
 			
 			rJob.add("id_ronde", r.getId_ronde());
+			rJob.add("naam", r.getNaam());
 			rJob.add("winnaar", r.getWinnaar().getNaam());
 			rJob.add("tijdUren", r.getTijd().getHours());
 			rJob.add("tijdMinuten", r.getTijd().getMinutes());

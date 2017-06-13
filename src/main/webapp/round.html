@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Rounde</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $.getJSON("./rest/rondes/laatsteronde", function(rondeData) {
+        $("#naamRonde").html(rondeData.naam);
+        $("#naamSpel").html(rondeData.spel);
+        $.each(rondeData.Spelers, function(v, n) {
+          var $options = $("<option/>").attr("value", n.id).text(n.naam);
+          $("#winnaar").append($options);
+        });
+        $.getJSON("./rest/spellen/" + rondeData.id_spel, function(spelData) {
+          $("#spelInstructies").html(spelData.Instructies);
+        });
+      });
+
+      function stopwatch() {
+        var h2 = document.getElementsByTagName('h3')[0],
+          secondes = 0,
+          minuten = 0,
+          uren = 0,
+          t;
+        var stoptijd = null;
+
+        function add() {
+          secondes++;
+          if (secondes >= 60) {
+            secondes = 0;
+            minuten++;
+            if (minuten >= 60) {
+              minuten = 0;
+              uren++;
+            }
+          }
+          h2.textContent = (uren ? (uren > 9 ? uren : "0" + uren) : "00") + ":" + (minuten ? (minuten > 9 ? minuten : "0" + minuten) : "00") + ":" + (secondes > 9 ? secondes : "0" + secondes);
+          timer();
+        }
+
+        function timer() {
+          t = setTimeout(add, 1000)
+        }
+        timer();
+      }
+      stopwatch();
+    });
+  </script>
+  <script src="./js/stopwatch.js"></script>
+</head>
+
+<body>
+  <div id="rondeContainter">
+    <h1>Offline game History</h1>
+    <div id="naamRonde">
+      <h2></h2> div rondeNaam
+    </div>
+    <div id="stopWatchTijd">
+      <h3><time>00:00:00</time></h3>
+      <!--   <button id="startTimer" name="startTimer" onclick="stopwatch()">Start</button>-->
+      div stopWatchTijd
+    </div>
+    <div id="naamSpel">
+      Hier komt spelNaam<br> div spelNaam
+    </div>
+    <div id="spelInstructies">
+      Hier komt spelInstructies<br> div spelInstructies
+    </div>
+    <br>
+    <div id="submitRondeSluitenButton">
+      <button type="button" name="rondeSluitenButton" id="rondeSluitenButton">Afgelopen!</button> div submitRondeSluitenButton
+    </div>
+  </div>
+  <script src="./js/javascript.js">
+  </script>
+</body>
+
+</html>

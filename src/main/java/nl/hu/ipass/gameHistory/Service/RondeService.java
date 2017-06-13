@@ -28,4 +28,8 @@ public class RondeService {
 		
 	}
 	
+	public Ronde getLaatsteRonde() throws SQLException{
+		return rondedao.laatsteRounde();
+	}
+	
 }

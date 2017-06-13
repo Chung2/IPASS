@@ -30,7 +30,9 @@ public class RondeResource {
 			JsonObjectBuilder sJob = Json.createObjectBuilder();
 
 			job.add("id_ronde", r.getId_ronde());
+			job.add("id_spel", r.getSpel().getId_spel());
 			job.add("spel", r.getSpel().getNaam());
+			job.add("naam", r.getNaam());
 			job.add("tijdUren", r.getTijd().getHours());
 			job.add("tijdMinuten", r.getTijd().getMinutes());
 			job.add("tijdSecondes", r.getTijd().getSeconds());
@@ -66,7 +68,9 @@ public class RondeResource {
 		JsonObjectBuilder sJob = Json.createObjectBuilder();
 		
 		job.add("id_ronde", rondeObj.getId_ronde());
+		job.add("id_spel", rondeObj.getSpel().getId_spel());
 		job.add("spel", rondeObj.getSpel().getNaam());
+		job.add("naam", rondeObj.getNaam());
 		job.add("tijdUren", rondeObj.getTijd().getHours());
 		job.add("tijdMinuten", rondeObj.getTijd().getMinutes());
 		job.add("tijdSecondes", rondeObj.getTijd().getSeconds());
@@ -84,5 +88,41 @@ public class RondeResource {
 		return job.build().toString();
 		
 	}
+	
+	@GET
+	@Path("/laatsteronde")
+	@Produces("application/json")
+	public String laatsteRonde() throws SQLException{
+		RondeService service = ServiceProvider.getRondeService();
+		Ronde rondeObj = service.getLaatsteRonde();
+		
+		JsonObjectBuilder job = Json.createObjectBuilder();
+		
+		JsonArrayBuilder sJab = Json.createArrayBuilder();
+		
+		JsonObjectBuilder sJob = Json.createObjectBuilder();
+		
+		job.add("id_ronde", rondeObj.getId_ronde());
+		job.add("id_spel", rondeObj.getSpel().getId_spel());
+		job.add("spel", rondeObj.getSpel().getNaam());
+		job.add("naam", rondeObj.getNaam());
+		job.add("tijdUren", rondeObj.getTijd().getHours());
+		job.add("tijdMinuten", rondeObj.getTijd().getMinutes());
+		job.add("tijdSecondes", rondeObj.getTijd().getSeconds());
+		job.add("winnaar", rondeObj.getWinnaar().getNaam());
+		job.add("notities", rondeObj.getNotities());
+		
+		for (Speler s : rondeObj.getDeelnemers()){
+			sJob.add("id", s.getId_speler());
+			sJob.add("naam", s.getNaam());
+			
+			sJab.add(sJob);
+		}
+		job.add("Spelers", sJab);		
+		
+		return job.build().toString();
+		
+	}
+
 
 }
