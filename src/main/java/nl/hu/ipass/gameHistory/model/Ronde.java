@@ -9,21 +9,33 @@ public class Ronde {
 	
 	private int id_ronde;
 	private String rondenaam;
-	
+	private int winnaarId;
+	private ArrayList<String> deelnemersNamen;
 	private Spel spel;
+	private int spelId;
 	private ArrayList<Speler> deelnemers;
 	//private Timestamp tijd;
 	private Speler winnaar;
 	private String notities;
 	private Time tijd;
 
-	public Ronde(int id_ronde, Spel spel,String naam, String naam1 ,String naam2,String naam3, Time tijd,String notities){
-		
-	}
 	
-	public Ronde(int id_ronde, Spel spel,String naam, ArrayList<Speler> deelnemers, Time tijd, Speler winnaar,String notities) {
+	
+	public Ronde(int id_ronde, String rondenaam, ArrayList<String> deelnemersNamen, int spelId, int winnaarId,
+			String notities, Time tijd) {
 		super();
-		this.rondenaam = naam;
+		this.id_ronde = id_ronde;
+		this.rondenaam = rondenaam;
+		this.deelnemersNamen = deelnemersNamen;
+		this.spelId = spelId;
+		this.winnaarId = winnaarId;
+		this.notities = notities;
+		this.tijd = tijd;
+	}
+
+	public Ronde(int id_ronde, Spel spel,String rondenaam, ArrayList<Speler> deelnemers, Time tijd, Speler winnaar,String notities) {
+		super();
+		this.rondenaam = rondenaam;
 		this.id_ronde = id_ronde;
 		this.spel = spel;
 		this.deelnemers = deelnemers;
@@ -79,6 +91,14 @@ public class Ronde {
 	public void setWinnaar(Speler winnaar) {
 		this.winnaar = winnaar;
 	}
+	
+	public int getWinnaarId() {
+		return winnaarId;
+	}
+
+	public void setWinnaarId(int winnaarId) {
+		this.winnaarId = winnaarId;
+	}
 
 	public String getNotities() {
 		return notities;
@@ -86,6 +106,30 @@ public class Ronde {
 
 	public void setNotities(String notities) {
 		this.notities = notities;
+	}
+
+	public String getRondenaam() {
+		return rondenaam;
+	}
+
+	public void setRondenaam(String rondenaam) {
+		this.rondenaam = rondenaam;
+	}
+
+	public ArrayList<String> getDeelnemersNamen() {
+		return deelnemersNamen;
+	}
+
+	public void setDeelnemersNamen(ArrayList<String> deelnemersNamen) {
+		this.deelnemersNamen = deelnemersNamen;
+	}
+
+	public int getSpelId() {
+		return spelId;
+	}
+
+	public void setSpelId(int spelId) {
+		this.spelId = spelId;
 	}
 
 	@Override

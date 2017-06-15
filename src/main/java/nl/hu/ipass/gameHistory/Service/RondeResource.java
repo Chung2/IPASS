@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -32,6 +33,7 @@ public class RondeResource {
 	public String alleRondes() throws SQLException{
 		RondeService service = ServiceProvider.getRondeService();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
+		
 		JsonArrayBuilder sJab = Json.createArrayBuilder();
 		
 		for(Ronde r: service.getAlleRonde()){
@@ -102,6 +104,7 @@ public class RondeResource {
 	@Path("/laatsteronde")
 	@Produces("application/json")
 	public String laatsteRonde() throws SQLException{
+		
 		RondeService service = ServiceProvider.getRondeService();
 		Ronde rondeObj = service.getLaatsteRonde();
 		
@@ -133,28 +136,55 @@ public class RondeResource {
 		
 	}
 	
-	/*@POST
+	@POST
+	@Path("/newround")
 	@Produces("application/json")
 	public Response addRonde(InputStream is) throws SQLException, IOException {
 
+		ArrayList<String> deelnemersNamen = new ArrayList<String>();
+		
 		RondeService service = ServiceProvider.getRondeService();
 		JsonObject object = Json.createReader(is).readObject();
-		
+				
 		String naam = object.getString("naam");
-		int spel = object.getInt("spel");
+		String spel = object.getString("spel");
 		String spelernaam1 = object.getString("speler1");
 		String spelernaam2 = object.getString("speler2");
 		String spelernaam3 = object.getString("speler3");
-		
+		int spelNummerFix = Integer.parseInt(spel);
+		deelnemersNamen.add(spelernaam1);
+		deelnemersNamen.add(spelernaam2);
+		deelnemersNamen.add(spelernaam3);
 //		String tijd = "00:00:00"; 
 //		DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
 		Time time = new Time(00,00,00);
 		
-		Ronde nieuwRonde = new Ronde(666, null, naam, null, time, , null);
-		service.addSpel(nieuwRonde);
+		Ronde nieuwRonde = new Ronde(999,naam,deelnemersNamen,spelNummerFix,5,"nog geen notities",time);
+		service.addRonde(nieuwRonde);
 
 		return Response.ok().build();
 	}
-*/
+	
+	
+	@POST
+	@Path("/updateendtime")
+	@Produces("application/json")
+	public Response updateTime(InputStream is) throws SQLException, IOException{
+	
+		RondeService service = ServiceProvider.getRondeService();
+		JsonObject object = Json.createReader(is).readObject();
+		
+		String uren = object.getString("uren");
+		String minuten = object.getString("minuten");
+		String secondes = object.getString("secondes");
+		
+		int urenFix = Integer.parseInt(uren);
+		int minutenFix = Integer.parseInt(minuten);
+		int secondesFix = Integer.parseInt(secondes);
+		Time eindTijd = new Time(urenFix, minutenFix, secondesFix);
+		System.out.println(eindTijd);
+		
+		return Response.ok().build();
+	}
 
 }

@@ -52,7 +52,8 @@ $("#rondeNaamButton").click(function() {
 //pagina selectgame
 $("#spelSelecterenButton").click(function() {
   var gekozenSpel = $("#spellen").val();
-  if (gekozenSpel === "Kies een spel!") {
+  var spelKiezen = $("#spellen option:selected").text();
+  if (spelKiezen === "Kies een spel!") {
     alert("Geen geldige spel!");
   } else {
     var spel = {
@@ -83,8 +84,7 @@ $("#selecterenSpelersButton").click(function() {
     var rondeObj = JSON.parse(sessionStorage.getItem("nieuwRonde"));
     var fusionObj = jQuery.extend(rondeObj, dataSpelers);
     var JSONdata = JSON.stringify(fusionObj);
-    console.log(JSONdata);
-    var uri = "./rest/rondes"
+    var uri = "./rest/rondes/newrond"
     var bevestiging = confirm("Weet je zeker dat je de ronde wilt starten?");
     if (bevestiging == true) {
       $.ajax(uri, {
@@ -95,15 +95,13 @@ $("#selecterenSpelersButton").click(function() {
         //    xhr.setRequestHeader('Authorization','Bearer' +token);
         //  },
         success: function(response) {
-          console.log("Success!");
           sessionStorage.removeItem("nieuwRonde");
+          window.location.href = "/gameHistory/round.html";
         },
         error: function(response) {
-          console.log("Error!");
+          alert("Ronde aanmaken is mislukt!");
         }
       });
-
-      //window.location.href = "/gameHistory/round.html";
     }
   }
 })
@@ -115,9 +113,36 @@ $("#rondeSluitenButton").click(function() {
   var minuten = tijd.slice(3, 5);
   var secondes = tijd.slice(6, 8);
 
+  console.log(uren);
+  console.log(minuten);
+  console.log(secondes);
+  var dataTijd = {
+    "uren": uren,
+    "minuten": minuten,
+    "secondes": secondes
+  }
+  var JSONdata = JSON.stringify(dataTijd);
+  console.log(JSONdata);
+
+  var uri = "./rest/rondes/updateendtime"
+
   var bevestiging = confirm("weet je zeker dat je de ronde wilt afsluiten?");
   if (bevestiging == true) {
-    window.location.href = "/gameHistory/postround.html";
+    $.ajax(uri, {
+      method: "POST",
+      data: JSONdata,
+      //  beforeSend: function(xhr){
+      //    var token = window.sessionStorage.getItem("sessionToken");
+      //    xhr.setRequestHeader('Authorization','Bearer' +token);
+      //  },
+      success: function(response) {
+        console.log("succes!");
+        //window.location.href = "/gameHistory/postround.html";
+      },
+      error: function(response) {
+        console.log("error!");
+      }
+    });
   }
 })
 

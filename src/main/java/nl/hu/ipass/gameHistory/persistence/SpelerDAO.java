@@ -86,11 +86,28 @@ public class SpelerDAO extends BaseDAO {
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()){
-			winnaar = getSpeler(id);
+			winnaar = getSpeler(rs.getInt("winnaar"));
 		}
 		con.close();
 		return winnaar;
 	}
 	
+	public ArrayList<Speler> getSpelersByNamen(ArrayList<String> deelnemersNamen) throws SQLException{
+		
+		Connection con = super.getConnection();
+		ArrayList<Speler> deelnemers = new ArrayList<Speler>();
+		String querySelect = "SELECT id_speler FROM speler where naam = ?";
+		
+		for(String s : deelnemersNamen){
+			PreparedStatement stmt = con.prepareStatement(querySelect);
+			stmt.setString(1, s);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				int idSpeler = rs.getInt("id_speler");
+				deelnemers.add(getSpeler(idSpeler));
+			}
+		}
+		return deelnemers;
+	}
 	
 }

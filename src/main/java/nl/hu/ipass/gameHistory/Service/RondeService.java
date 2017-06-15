@@ -29,7 +29,10 @@ public class RondeService {
 	}
 	
 	public Ronde getLaatsteRonde() throws SQLException{
-		return rondedao.laatsteRounde();
+		return rondedao.laatsteRonde();
 	}
 	
+	public boolean addRonde(Ronde ronde) throws SQLException{
+		return rondedao.nieuwRonde(ronde);
+	}
 }
