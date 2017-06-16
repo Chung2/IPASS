@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -29,6 +30,7 @@ public class RondeResource {
 
 	@SuppressWarnings("deprecation")
 	@GET
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String alleRondes() throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
@@ -67,6 +69,7 @@ public class RondeResource {
 
 	@GET
 	@Path("{id}")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String findRonde(@PathParam("id") int id) throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
@@ -102,6 +105,7 @@ public class RondeResource {
 
 	@GET
 	@Path("/laatsteronde")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String laatsteRonde() throws SQLException {
 
@@ -138,6 +142,7 @@ public class RondeResource {
 
 	@POST
 	@Path("/newround")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public Response addRonde(InputStream is) throws SQLException, IOException {
 
@@ -167,6 +172,7 @@ public class RondeResource {
 
 	@POST
 	@Path("/updateendtime")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public Response updateTime(InputStream is) throws SQLException, IOException {
 
@@ -187,6 +193,7 @@ public class RondeResource {
 	}
 
 	@POST
+	@RolesAllowed({"admin","user"})
 	@Path("/updatepostround")
 	@Produces("application/json")
 	public Response updatePostRound(InputStream is) throws SQLException, IOException {

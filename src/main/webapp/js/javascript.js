@@ -1,5 +1,20 @@
 //functies onclick
 
+
+//index.html
+
+$("#loginButton").click(function(){
+  var loginData = $("#loginForm").serialize();
+
+  $.post("./rest/authentication",loginData, function(response){
+    window.sessionStorage.setItem("sessionToken",response);
+    window.location.href ="/gameHistory/menu.html";
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    console.log(textStatus);
+    console.log(errorThrown);
+  });
+});
+
 //menu speler
 $("#rondeStartenButton").click(function() {
   window.location.href = "/gameHistory/createround.html";
@@ -7,6 +22,11 @@ $("#rondeStartenButton").click(function() {
 
 $("#geschiedenisButton").click(function() {
   window.location.href = "/gameHistory/history.html";
+})
+
+$("#logoutButton").click(function(){
+  window.sessionStorage.removeItem('sessionToken');
+  window.location.href ="/gameHistory/index.html"
 })
 
 //menu admin
@@ -128,7 +148,7 @@ $("#rondeSluitenButton").click(function() {
   var bevestiging = confirm("weet je zeker dat je de ronde wilt afsluiten?");
   if (bevestiging == true) {
     $.ajax(uri, {
-      method: "POST",
+      method: "PUT",
       data: JSONdata,
       success: function(response) {
         console.log("succes!");
@@ -155,12 +175,12 @@ $("#rondeOpslaanButton").click(function() {
   } else {
     alert("De ronde wordt nu opgeslagen!");
     $.ajax(uri, {
-      method: "POST",
+      method: "PUT",
       data: JSONdata,
       success: function(response) {
         console.log("succes!");
         setTimeout(function() {
-          window.location.href = "/gameHistory/menu.html"
+          window.location.href = "/gameHistory/history.html"
         }, 2000);
       },
       error: function(response) {

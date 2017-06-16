@@ -2,6 +2,7 @@ package nl.hu.ipass.gameHistory.Service;
 
 import java.sql.SQLException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -19,6 +20,7 @@ import nl.hu.ipass.gameHistory.model.Speler;
 public class SpelerResource {
 
 	@GET
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String getSpelers() throws SQLException {
 
@@ -48,6 +50,7 @@ public class SpelerResource {
 
 	@GET
 	@Path("{id}")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String spelerById(@PathParam("id") int id) throws SQLException {
 		SpelerService service = ServiceProvider.getSpelerService();
@@ -73,6 +76,7 @@ public class SpelerResource {
 
 	@GET
 	@Path("/testdatabase")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 
 	public String getTest() throws SQLException {

@@ -32,13 +32,13 @@ public class SpelerDAO extends BaseDAO {
 		Connection con = super.getConnection();
 
 		ArrayList<Speler> spelers = new ArrayList<Speler>();
-		String querySelect = "SELECT id_speler,naam,wachtwoord FROM Speler";
+		String querySelect = "SELECT id_speler,naam,wachtwoord,rol FROM Speler";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
 			spelers.add(new Speler(rs.getInt("id_speler"), rs.getString("naam"), rs.getString("wachtwoord"),
-					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler"))));
+					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")),rs.getString("rol")));
 		}
 		con.close();
 		return spelers;
@@ -49,14 +49,14 @@ public class SpelerDAO extends BaseDAO {
 		Connection con = super.getConnection();
 
 		Speler speler = null;
-		String querySelect = "SELECT id_speler,naam, wachtwoord FROM Speler WHERE id_speler = ?";
+		String querySelect = "SELECT id_speler,naam, wachtwoord, rol FROM Speler WHERE id_speler = ?";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
 			speler = new Speler(rs.getInt("id_speler"), rs.getString("naam"), rs.getString("wachtwoord"),
-					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")));
+					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")),rs.getString("rol"));
 		}
 		con.close();
 		return speler;
@@ -108,6 +108,28 @@ public class SpelerDAO extends BaseDAO {
 			}
 		}
 		return deelnemers;
+	}
+	
+	public String findRolForNaamAndWachtwoord(String username, String password){
+		
+		String rol = null;
+		String querySelect = "SELECT rol FROM speler WHERE naam = ? AND wachtwoord = ?";
+		
+		try(Connection con = super.getConnection()){
+			PreparedStatement pstmt = con.prepareStatement(querySelect);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next())
+				rol = rs.getString("rol");
+				
+		}catch(SQLException sqle){
+			sqle.printStackTrace();
+		}
+		
+		return rol;
 	}
 	
 }

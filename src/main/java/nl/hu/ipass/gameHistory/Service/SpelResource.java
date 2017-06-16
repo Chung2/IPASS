@@ -28,6 +28,7 @@ import nl.hu.ipass.gameHistory.model.Speler;
 public class SpelResource {
 	
 	@GET
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String allSpellen() throws SQLException{
 		SpelService service = ServiceProvider.getSpelService();
@@ -61,6 +62,7 @@ public class SpelResource {
 	
 	@GET
 	@Path("{id}")
+	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String getSpel(@PathParam("id") int id) throws SQLException{
 		
@@ -104,6 +106,7 @@ public class SpelResource {
 	}
 	
 	@POST
+	@RolesAllowed("admin")
 	@Produces("application/json")
 	public Response addSpel(InputStream is) throws SQLException, IOException {
 
@@ -121,6 +124,7 @@ public class SpelResource {
 	}
 	
 	@DELETE
+	@RolesAllowed("admin")
 	@Path("/delete/{id}")
 	public Response deleteCountry(@PathParam("id") int id) throws SQLException {
 		SpelService service = ServiceProvider.getSpelService();
