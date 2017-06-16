@@ -84,7 +84,7 @@ $("#selecterenSpelersButton").click(function() {
     var rondeObj = JSON.parse(sessionStorage.getItem("nieuwRonde"));
     var fusionObj = jQuery.extend(rondeObj, dataSpelers);
     var JSONdata = JSON.stringify(fusionObj);
-    var uri = "./rest/rondes/newrond"
+    var uri = "./rest/rondes/newround"
     var bevestiging = confirm("Weet je zeker dat je de ronde wilt starten?");
     if (bevestiging == true) {
       $.ajax(uri, {
@@ -122,7 +122,6 @@ $("#rondeSluitenButton").click(function() {
     "secondes": secondes
   }
   var JSONdata = JSON.stringify(dataTijd);
-  console.log(JSONdata);
 
   var uri = "./rest/rondes/updateendtime"
 
@@ -131,13 +130,9 @@ $("#rondeSluitenButton").click(function() {
     $.ajax(uri, {
       method: "POST",
       data: JSONdata,
-      //  beforeSend: function(xhr){
-      //    var token = window.sessionStorage.getItem("sessionToken");
-      //    xhr.setRequestHeader('Authorization','Bearer' +token);
-      //  },
       success: function(response) {
         console.log("succes!");
-        //window.location.href = "/gameHistory/postround.html";
+        window.location.href = "/gameHistory/postround.html";
       },
       error: function(response) {
         console.log("error!");
@@ -151,13 +146,27 @@ $("#rondeOpslaanButton").click(function() {
   var winnaar = $("#winnaar").val();
   var notities = $("textarea#notities").val();
 
+  var dataPostRound = {"winnaar":winnaar, "notities":notities};
+  var uri = "./rest/rondes/updatepostround";
+
+  var JSONdata = JSON.stringify(dataPostRound);
   if (winnaar === "Kies de winnaar!" || winnaar === "Arnoud") {
     alert("Geen geldige winnaar gekozen!");
   } else {
     alert("De ronde wordt nu opgeslagen!");
-    setTimeout(function() {
-      window.location.href = "/gameHistory/menu.html"
-    }, 2000);
+    $.ajax(uri, {
+      method: "POST",
+      data: JSONdata,
+      success: function(response) {
+        console.log("succes!");
+        setTimeout(function() {
+          window.location.href = "/gameHistory/menu.html"
+        }, 2000);
+      },
+      error: function(response) {
+        console.log("error!");
+      }
+    });
   }
 })
 

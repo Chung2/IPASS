@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class Ronde {
-	
+
 	private int id_ronde;
 	private String rondenaam;
 	private int winnaarId;
@@ -14,13 +14,11 @@ public class Ronde {
 	private Spel spel;
 	private int spelId;
 	private ArrayList<Speler> deelnemers;
-	//private Timestamp tijd;
+	// private Timestamp tijd;
 	private Speler winnaar;
 	private String notities;
 	private Time tijd;
 
-	
-	
 	public Ronde(int id_ronde, String rondenaam, ArrayList<String> deelnemersNamen, int spelId, int winnaarId,
 			String notities, Time tijd) {
 		super();
@@ -33,7 +31,8 @@ public class Ronde {
 		this.tijd = tijd;
 	}
 
-	public Ronde(int id_ronde, Spel spel,String rondenaam, ArrayList<Speler> deelnemers, Time tijd, Speler winnaar,String notities) {
+	public Ronde(int id_ronde, Spel spel, String rondenaam, ArrayList<Speler> deelnemers, Time tijd, Speler winnaar,
+			String notities) {
 		super();
 		this.rondenaam = rondenaam;
 		this.id_ronde = id_ronde;
@@ -50,7 +49,7 @@ public class Ronde {
 
 	public void setId_ronde(int id_ronde) {
 		this.id_ronde = id_ronde;
-	}	
+	}
 
 	public Spel getSpel() {
 		return spel;
@@ -91,7 +90,7 @@ public class Ronde {
 	public void setWinnaar(Speler winnaar) {
 		this.winnaar = winnaar;
 	}
-	
+
 	public int getWinnaarId() {
 		return winnaarId;
 	}
@@ -134,8 +133,8 @@ public class Ronde {
 
 	@Override
 	public String toString() {
-		return "Ronde [id_ronde=" + id_ronde + ", spel=" + spel + ", deelnemers=" + deelnemers
-				+ ", tijd=" + tijd + ", winnaar=" + winnaar + ", notities=" + notities + "]";
+		return "Ronde [id_ronde=" + id_ronde + ", spel=" + spel + ", deelnemers=" + deelnemers + ", tijd=" + tijd
+				+ ", winnaar=" + winnaar + ", notities=" + notities + "]";
 	}
-	
+
 }

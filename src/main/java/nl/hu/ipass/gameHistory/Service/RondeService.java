@@ -1,6 +1,7 @@
 package nl.hu.ipass.gameHistory.Service;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import nl.hu.ipass.gameHistory.model.Ronde;
@@ -34,5 +35,13 @@ public class RondeService {
 	
 	public boolean addRonde(Ronde ronde) throws SQLException{
 		return rondedao.nieuwRonde(ronde);
+	}
+	
+	public boolean updateEindTijd(Ronde ronde) throws SQLException{
+		return rondedao.updateEindTijd(ronde);
+	}
+	
+	public boolean updatePostRound(Ronde ronde) throws SQLException{
+		return rondedao.updatePostRonde(ronde);
 	}
 }

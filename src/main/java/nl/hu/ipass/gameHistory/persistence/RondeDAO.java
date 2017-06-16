@@ -133,10 +133,10 @@ public class RondeDAO extends BaseDAO {
 				break;
 			}
 
-		}				
+		}
 		con.close();
 		return gelukt;
-		
+
 	}
 
 	public boolean nieuwRonde(Ronde ronde) throws SQLException {
@@ -153,35 +153,76 @@ public class RondeDAO extends BaseDAO {
 		int rs = stmt.executeUpdate();
 
 		if (rs > 0) {
-			
-			gelukt = true;			
+
+			gelukt = true;
 			con.close();
 			stmt.close();
 			insertResultaatRonde(ronde);
 		}
 		return gelukt;
 	}
-	
-	public boolean updateEindTijd(Time time) throws SQLException{
-		
-		Ronde laatsteronde = laatsteRonde();
-		
+
+	public boolean updateEindTijd(Ronde ronde) throws SQLException {
+
 		Connection con = super.getConnection();
 		boolean gelukt = false;
-		
+
 		String updateQuery = "UPDATE ronde SET tijd = ? WHERE id_ronde = ?";
 		PreparedStatement stmt = con.prepareStatement(updateQuery);
-		
-		stmt.setTime(1, time);
-		stmt.setInt(2, laatsteronde.getId_ronde());
-		
+
+		stmt.setTime(1, ronde.getTijd());
+		stmt.setInt(2, ronde.getId_ronde());
+
 		int rs = stmt.executeUpdate();
-		if(rs > 0){
+		if (rs > 0) {
 			gelukt = true;
 			stmt.close();
 			con.close();
 		}
-		
+
+		return gelukt;
+	}
+
+	public boolean updateNotities(Ronde ronde) throws SQLException {
+
+		Connection con = super.getConnection();
+		Ronde laatsteronde = laatsteRonde();
+		boolean gelukt = false;
+
+		String updateQuery = "UPDATE ronde SET notities = ? where id_ronde = ?";
+
+		PreparedStatement stmt = con.prepareStatement(updateQuery);
+		stmt.setString(1, ronde.getNotities());
+		stmt.setInt(2, laatsteronde.getId_ronde());
+
+		int rs = stmt.executeUpdate();
+		if (rs > 0) {
+			gelukt = true;
+			stmt.close();
+			con.close();
+		}
+
+		return gelukt;
+	}
+
+	public boolean updatePostRonde(Ronde ronde) throws SQLException {
+
+		Connection con = super.getConnection();
+		boolean gelukt = false;
+
+		String updateQuery = "UPDATE resultaat SET winnaar = ? where id_ronde = ?";
+		PreparedStatement stmt = con.prepareStatement(updateQuery);
+
+		stmt.setInt(1, ronde.getWinnaarId());
+		stmt.setInt(2, ronde.getId_ronde());
+
+		int rs = stmt.executeUpdate();
+		if (rs > 0) {
+			gelukt = true;
+			stmt.close();
+			con.close();
+			updateNotities(ronde);
+		}
 		return gelukt;
 	}
 }
