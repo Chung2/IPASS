@@ -23,19 +23,19 @@ public class AuthenticationResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response authenticateUser(@FormParam("naam") String naam, @FormParam("wachtwoord") String wachtwoord){
-		System.out.println(naam);
-		System.out.println(wachtwoord);
+		
 		try{
 			SpelerDAO spelerdao = new SpelerDAO();
-			String rol = spelerdao.findRolForNaamAndWachtwoord(naam, wachtwoord);
-			if(rol == null){throw new IllegalArgumentException("No user Found!");}
+			String role = spelerdao.findRolForNaamAndWachtwoord(naam, wachtwoord);
+
+			if(role == null){throw new IllegalArgumentException("No user Found!");}
 			
 			Calendar expiration = Calendar.getInstance();
 			expiration.add(Calendar.HOUR, 2);
 			
 			String token = Jwts.builder()
 					.setSubject(naam)
-					.claim("rol",rol)
+					.claim("role",role)
 					.setExpiration(expiration.getTime())
 					.signWith(SignatureAlgorithm.HS512,key)
 					.compact();

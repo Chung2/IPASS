@@ -32,9 +32,9 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 				Claims claims = parser.parseClaimsJws(token).getBody();
 
 				String user = claims.getSubject();
-				String rol = claims.get("rol").toString();
+				String role = claims.get("role").toString();
 
-				msc = new MySecurityContext(user, rol, isSecure);
+				msc = new MySecurityContext(user, role, isSecure);
 			} catch (JwtException | IllegalArgumentException e) {
 				System.out.println("Invalid JWT, processing as guest, of te wel geen rechten!");
 			}

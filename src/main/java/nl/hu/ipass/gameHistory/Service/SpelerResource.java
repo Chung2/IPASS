@@ -20,7 +20,6 @@ import nl.hu.ipass.gameHistory.model.Speler;
 public class SpelerResource {
 
 	@GET
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String getSpelers() throws SQLException {
 
@@ -34,7 +33,7 @@ public class SpelerResource {
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("id_gebruiker", spelerObj.getId_speler());
 			job.add("naam", spelerObj.getNaam());
-			job.add("wachtwoord", spelerObj.getWachtwoord());
+			//job.add("wachtwoord", spelerObj.getWachtwoord());
 			for (Integer r : spelerObj.getRondes()) {
 				rJob.add("id_ronde", r);
 				
@@ -50,7 +49,6 @@ public class SpelerResource {
 
 	@GET
 	@Path("{id}")
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String spelerById(@PathParam("id") int id) throws SQLException {
 		SpelerService service = ServiceProvider.getSpelerService();
@@ -62,7 +60,7 @@ public class SpelerResource {
 		
 		job.add("id_gebruiker", spelerObj.getId_speler());
 		job.add("naam", spelerObj.getNaam());
-		job.add("wachtwoord", spelerObj.getWachtwoord());
+		//job.add("wachtwoord", spelerObj.getWachtwoord());
 		for (Integer r : spelerObj.getRondes()) {
 			
 			rJob.add("id_ronde", r);
@@ -76,7 +74,6 @@ public class SpelerResource {
 
 	@GET
 	@Path("/testdatabase")
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 
 	public String getTest() throws SQLException {

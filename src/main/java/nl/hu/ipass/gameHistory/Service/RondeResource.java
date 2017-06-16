@@ -16,6 +16,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,7 +31,6 @@ public class RondeResource {
 
 	@SuppressWarnings("deprecation")
 	@GET
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String alleRondes() throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
@@ -69,7 +69,6 @@ public class RondeResource {
 
 	@GET
 	@Path("{id}")
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String findRonde(@PathParam("id") int id) throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
@@ -105,7 +104,6 @@ public class RondeResource {
 
 	@GET
 	@Path("/laatsteronde")
-	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
 	public String laatsteRonde() throws SQLException {
 
@@ -170,7 +168,7 @@ public class RondeResource {
 		return Response.ok().build();
 	}
 
-	@POST
+	@PUT
 	@Path("/updateendtime")
 	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
@@ -188,11 +186,12 @@ public class RondeResource {
 		int secondesFix = Integer.parseInt(secondes);
 		Time eindTijd = new Time(urenFix, minutenFix, secondesFix);
 		Ronde laatsteronde = service.getLaatsteRonde();
+		laatsteronde.setTijd(eindTijd);
 		service.updateEindTijd(laatsteronde);
 		return Response.ok().build();
 	}
 
-	@POST
+	@PUT
 	@RolesAllowed({"admin","user"})
 	@Path("/updatepostround")
 	@Produces("application/json")

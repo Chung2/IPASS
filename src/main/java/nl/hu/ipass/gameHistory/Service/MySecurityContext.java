@@ -7,12 +7,12 @@ import javax.ws.rs.core.SecurityContext;
 public class MySecurityContext implements SecurityContext {
 
 	private String naam;
-	private String rol;
+	private String role;
 	private boolean isSecure;
 
-	public MySecurityContext(String naam, String rol, boolean isSecure) {
+	public MySecurityContext(String naam, String role, boolean isSecure) {
 		this.naam = naam;
-		this.rol = rol;
+		this.role = role;
 	}
 
 	public Principal getUserPrincipal() {
@@ -23,8 +23,8 @@ public class MySecurityContext implements SecurityContext {
 		};
 	}
 
-	public boolean isUserInRole(String rol) {
-		return rol.equals(this.rol);
+	public boolean isUserInRole(String role) {
+		return role.equals(this.role);
 	}
 
 	public boolean isSecure() {

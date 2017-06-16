@@ -110,10 +110,10 @@ $("#selecterenSpelersButton").click(function() {
       $.ajax(uri, {
         method: "POST",
         data: JSONdata,
-        //  beforeSend: function(xhr){
-        //    var token = window.sessionStorage.getItem("sessionToken");
-        //    xhr.setRequestHeader('Authorization','Bearer' +token);
-        //  },
+         beforeSend: function(xhr){
+           var token = window.sessionStorage.getItem("sessionToken");
+           xhr.setRequestHeader('Authorization','Bearer ' +token);
+         },
         success: function(response) {
           sessionStorage.removeItem("nieuwRonde");
           window.location.href = "/gameHistory/round.html";
@@ -150,6 +150,10 @@ $("#rondeSluitenButton").click(function() {
     $.ajax(uri, {
       method: "PUT",
       data: JSONdata,
+      beforeSend: function(xhr){
+      var token = window.sessionStorage.getItem("sessionToken");
+      xhr.setRequestHeader('Authorization','Bearer ' +token);
+      },
       success: function(response) {
         console.log("succes!");
         window.location.href = "/gameHistory/postround.html";
@@ -177,6 +181,10 @@ $("#rondeOpslaanButton").click(function() {
     $.ajax(uri, {
       method: "PUT",
       data: JSONdata,
+      beforeSend: function(xhr){
+      var token = window.sessionStorage.getItem("sessionToken");
+      xhr.setRequestHeader('Authorization','Bearer ' +token);
+      },
       success: function(response) {
         console.log("succes!");
         setTimeout(function() {
@@ -188,6 +196,10 @@ $("#rondeOpslaanButton").click(function() {
       }
     });
   }
+})
+
+$("#menuButton").click(function(){
+  window.location.href ="/gameHistory/menu.html";
 })
 
 //pagina addgame
@@ -222,12 +234,12 @@ $("#toevoegenGameButton").click(function() {
         var uri = "../rest/spellen/"
         $.ajax(uri, {
           method: "POST",
-          data: JSONdata,
-          //  beforeSend: function(xhr){
-          //    var token = window.sessionStorage.getItem("sessionToken");
-          //    xhr.setRequestHeader('Authorization','Bearer' +token);
-          //  },
+           beforeSend: function(xhr){
+             var token = window.sessionStorage.getItem("sessionToken");
+             xhr.setRequestHeader('Authorization','Bearer ' +token);
+           },
           success: function(response) {
+          data: JSONdata,
             alert("Het spel " + nieuwSpel + " is toegevoegd!");
           },
           error: function(response) {
@@ -248,6 +260,10 @@ function deleteButton(id, naam) {
     var uri = "../rest/spellen/delete/" + id;
     $.ajax(uri, {
       method: "DELETE",
+      beforeSend: function(xhr){
+      var token = window.sessionStorage.getItem("sessionToken");
+      xhr.setRequestHeader('Authorization','Bearer ' +token);
+      },
       success: function(response) {
         alert(naamFix + " is verwijderd!");
       },
