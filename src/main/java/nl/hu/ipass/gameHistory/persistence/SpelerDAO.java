@@ -110,12 +110,12 @@ public class SpelerDAO extends BaseDAO {
 		return deelnemers;
 	}
 	
-	public String findRolForNaamAndWachtwoord(String username, String password){
+	public String findRolForNaamAndWachtwoord(String username, String password) throws SQLException{
 		
+		Connection con = super.getConnection();
 		String rol = null;
 		String querySelect = "SELECT rol FROM speler WHERE naam = ? AND wachtwoord = ?";
 		
-		try(Connection con = super.getConnection()){
 			PreparedStatement pstmt = con.prepareStatement(querySelect);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
@@ -125,10 +125,7 @@ public class SpelerDAO extends BaseDAO {
 			if (rs.next())
 				rol = rs.getString("rol");
 				
-		}catch(SQLException sqle){
-			sqle.printStackTrace();
-		}
-		
+		con.close();
 		return rol;
 	}
 	

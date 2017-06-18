@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Nieuwe Ronde</title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <script src="./js/checksession.js"></script>
-  </head>
-  <body>
-    <div id="rondeNaamContainer">
-    <h1>Offline game History</h1>
 
-    <div id="rondeNaam">
-    Vul een ronde naam in:<br>
-    <input type="text" name="nieuwRondeNaam" id="nieuwRondeNaam" placeholder="Ronde naam" required><br>
-    </div>
-    <div id="submitRondeNaamButton">
-    <button type="button" name="rondeNaamButton" id="rondeNaamButton">Volgende</button>
+<head>
+  <meta charset="utf-8">
+  <title>Nieuwe Ronde</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./js/checksession.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div id="rondeNaamContainer">
+      <h1>Offline game History</h1>
+      <div class="form-group">
+        <label for "naamrondeLbl">Vul een ronde naam in:</label><br>
+        <input type="text" name="nieuwRondeNaam" id="nieuwRondeNaam" placeholder="Ronde naam" required>
+      </div>
+      <div id="submitRondeNaamButton">
+        <button type="button" class="btn btn-success" name="rondeNaamButton" id="rondeNaamButton">Volgende</button>
+      </div>
+      <script src="./js/javascript.js">
+      </script>
     </div>
   </div>
-  <script src="./js/javascript.js">
-  </script>
-  </body>
+</body>
+
 </html>

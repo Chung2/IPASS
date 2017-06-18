@@ -168,13 +168,14 @@ $("#rondeSluitenButton").click(function() {
 //pagina posround
 $("#rondeOpslaanButton").click(function() {
   var winnaar = $("#winnaar").val();
+  var winnaarKiezen = $("#winnaar option:selected").text();
   var notities = $("textarea#notities").val();
 
   var dataPostRound = {"winnaar":winnaar, "notities":notities};
   var uri = "./rest/rondes/updatepostround";
 
   var JSONdata = JSON.stringify(dataPostRound);
-  if (winnaar === "Kies de winnaar!" || winnaar === "Arnoud") {
+  if (winnaarKiezen === "Kies de winnaar!" || winnaarKiezen === "Arnoud") {
     alert("Geen geldige winnaar gekozen!");
   } else {
     alert("De ronde wordt nu opgeslagen!");
@@ -202,11 +203,15 @@ $("#menuButton").click(function(){
   window.location.href ="/gameHistory/menu.html";
 })
 
+$("#menuAdminButton").click(function(){
+  window.location.href ="/gameHistory/admin/adminmenu.html";
+})
+
 //pagina addgame
 $("#toevoegenGameButton").click(function() {
 
   var nieuwSpel = $("#GameNaam").val();
-  var nieuwInstructies = $("#gameInstructies").val();
+  var nieuwInstructies = $("textarea#gameInstructies").val();
   var bestaandeSpellen = [];
   var bestaat = false;
 
@@ -231,16 +236,18 @@ $("#toevoegenGameButton").click(function() {
         };
 
         var JSONdata = JSON.stringify(data);
-        var uri = "../rest/spellen/"
+        var uri = "../rest/spellen/nieuwspel"
         $.ajax(uri, {
           method: "POST",
+          data: JSONdata,
            beforeSend: function(xhr){
              var token = window.sessionStorage.getItem("sessionToken");
              xhr.setRequestHeader('Authorization','Bearer ' +token);
            },
           success: function(response) {
-          data: JSONdata,
             alert("Het spel " + nieuwSpel + " is toegevoegd!");
+            $("#GameNaam").val('');
+            $("#textarea#Instructies").val('');
           },
           error: function(response) {
             alert("Het spel " + nieuwSpel + " is niet toegevoegd!");

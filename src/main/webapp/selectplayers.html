@@ -16,8 +16,8 @@
           spelers.push(n.naam);
         })
         $("#speler1").autocomplete({
-            source: spelers
-            });
+          source: spelers
+        });
         $("#speler2").autocomplete({
           source: spelers
         });
@@ -27,21 +27,31 @@
       });
     });
   </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div id="spelersSelectContainer">
-    <h1>Offline game History</h1> div spelersSelectContainer
-    <div id="spelerSelect">
-      Speler 1 <input type="text" name="speler1" id="speler1" placeholder="Voeg een speler toe!"><br> Speler 2 <input type="text" name="speler2" id="speler2" placeholder="Voeg een speler 2 toe!"><br> Speler 3 <input type="text" name="speler2" id="speler3"
-        placeholder="Voeg een speler 3 toe!"><br> div spelerSelect
-    </div>
-    <div id="submitSelecterenSpelersButton">
-      <button type="button" name="selecterenSpelersButton" id="selecterenSpelersButton">Start Ronde!</button> div submbitSelecterenSpelersButton
-    </div>
+  <div class="container">
+    <div id="spelersSelectContainer">
+      <h1>Offline game History</h1>
+      <div class="col-xs-3">
+      <div id="spelerSelect">
+        <div class="form-group">
+          Speler 1 <input type="text" class="form-control" name="speler1" id="speler1" placeholder="Voeg een speler toe!"><br> Speler 2 <input type="text" class="form-control" name="speler2" id="speler2" placeholder="Voeg een speler 2 toe!"><br> Speler 3 <input type="text" name="speler2" class="form-control" id="speler3"
+            placeholder="Voeg een speler 3 toe!"><br>
+        </div>
   </div>
-  <script src="./js/javascript.js">
-  </script>
+      <div id="submitSelecterenSpelersButton">
+        <button type="button" name="selecterenSpelersButton" class="btn btn-success" id="selecterenSpelersButton">Start Ronde!</button>
+      </div>
+    <script src="./js/javascript.js">
+
+    </script>
+
+</div>
+        </div>
+    
+  </div>
 </body>
 
 </html>

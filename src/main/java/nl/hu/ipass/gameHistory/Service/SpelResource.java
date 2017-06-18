@@ -104,6 +104,7 @@ public class SpelResource {
 	}
 	
 	@POST
+	@Path("/nieuwspel")
 	@RolesAllowed("admin")
 	@Produces("application/json")
 	public Response addSpel(InputStream is) throws SQLException, IOException {
@@ -113,11 +114,12 @@ public class SpelResource {
 		
 		String naam = object.getString("naam");
 		String instructies = object.getString("Instructies");
+		System.out.println(instructies);
 		
 		Spel nieuwSpel = new Spel(999,naam,instructies);
 			
 		service.addSpel(nieuwSpel);
-
+		is.close();
 		return Response.ok().build();
 	}
 	
@@ -129,6 +131,7 @@ public class SpelResource {
 
 		Spel deleteC = service.getSpel(id);
 		service.deleteSpel(deleteC);
+		
 		return Response.ok().build();
 	}
 	

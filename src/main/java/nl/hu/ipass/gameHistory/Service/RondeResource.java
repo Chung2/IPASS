@@ -164,6 +164,7 @@ public class RondeResource {
 
 		Ronde nieuwRonde = new Ronde(999, naam, deelnemersNamen, spelNummerFix, 5, "nog geen notities", time);
 		service.addRonde(nieuwRonde);
+		is.close();
 
 		return Response.ok().build();
 	}
@@ -188,6 +189,7 @@ public class RondeResource {
 		Ronde laatsteronde = service.getLaatsteRonde();
 		laatsteronde.setTijd(eindTijd);
 		service.updateEindTijd(laatsteronde);
+		is.close();
 		return Response.ok().build();
 	}
 
@@ -207,6 +209,7 @@ public class RondeResource {
 		laatsteronde.setNotities(notities);
 		laatsteronde.setWinnaarId(winnaarFix);
 		service.updatePostRound(laatsteronde);
+		is.close();
 		return Response.ok().build();
 	}
 

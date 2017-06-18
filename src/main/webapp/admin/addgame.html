@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Spel toevoegen</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./js/checksession.js"></script>
 
-  </head>
-  <body>
-  <div id="toevoegenGameContainer">
-    <h1>Offline game History</h1>
-  <div id="titel">
-  Toevoegen Game
+<head>
+  <meta charset="utf-8">
+  <title>Spel toevoegen</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/checksession.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div id="toevoegenGameContainer">
+      <h1>Offline game History</h1>
+      <div id="titel">
+        <h4>Toevoegen Game</h4>
+      </div>
+      <div id="nieuwGameNaam">
+        Voer hier de nieuwe naam in voor het spel!
+        <input type="text" name="gameNaam" class="form-control" placeholder="Spelnaam!" id="GameNaam">
+      </div>
+      <div id="nieuwGameInstructies">
+        Voer hier de instructies voor het nieuwe spel!<br>
+        <textarea id="gameInstructies" class="form-control" name="gameInstructies" rows="8" cols="80" placeholder="Instructiess"></textarea>
+      </div>
+      <div id="submitToevoegenGameButton">
+        <button type="button" name="toevoegenGameButton" class="btn btn-success" id="toevoegenGameButton">Spel toevoegen!</button>
+          <button type="button" id="menuAdminButton" class="btn btn-primary" name="menuAdminButton">Terug menu!</button>
+      </div>
+    </div>
+    <script src="../js/javascript.js">
+    </script>
   </div>
-  <div id="nieuwGameNaam">
-    Nieuwe naam spel
-    <input type="text" name="gameNaam" placeholder="Voer een nieuwe spelnaam in!" id="GameNaam">
-    div nieuwGameNaam
-  </div>
-  <div id="nieuwGameInstructies">
-    Instructies voor het nieuwe spel!<br>
-    <textarea id="gameInstructies" name="gameInstructies" rows="8" cols="80" placeholder="Voer de instructies in voor het nieuwe spel!"></textarea>
-    div nieuwGameInstructies
-  </div>
-  <div id="submitToevoegenGameButton">
-    <button type="button" name="toevoegenGameButton" id="toevoegenGameButton">Spel toevoegen!</button> div submitToevoegenGameButton
-  </div>
-  </div>
-  <script src="../js/javascript.js">
-  </script>
-  </body>
+</body>
+
 </html>

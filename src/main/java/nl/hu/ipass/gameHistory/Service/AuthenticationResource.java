@@ -1,6 +1,7 @@
 package nl.hu.ipass.gameHistory.Service;
 
 import java.security.Key;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 import javax.ws.rs.Consumes;
@@ -22,7 +23,7 @@ public class AuthenticationResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response authenticateUser(@FormParam("naam") String naam, @FormParam("wachtwoord") String wachtwoord){
+	public Response authenticateUser(@FormParam("naam") String naam, @FormParam("wachtwoord") String wachtwoord) throws SQLException{
 		
 		try{
 			SpelerDAO spelerdao = new SpelerDAO();

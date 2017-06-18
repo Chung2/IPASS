@@ -4,25 +4,30 @@
     <meta charset="utf-8">
     <title>Login</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <link rel="stylesheet" href="./styles/masterStyles.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   </head>
   <body>
-    <div id="login">
+    <div class="container">
+    <div id="loginFormDiv">
     <h1>Offline game History</h1>
+    <div class="col-xs-4">
       <form id="loginForm">
       	<div id="username">
-        gebruikersnaam <input type="text" name="naam" id="naam" placeholder="Naam">
-        div username
+        Naam <input type="text" class="form-control" name="naam" id="naam" placeholder="Naam">
 		</div>
 		<div id="password">
-        wachtwoord <input type="text" name="wachtwoord" id="naam" placeholder="Wachtwoord"> div password
+        Wachtwoord <input type="password" class="form-control" name="wachtwoord" id="naam" placeholder="Wachtwoord"><br>
         </div><div id="submitLoginButton">
-        <button type="button" name="loginButton" id="loginButton">Login</button>
-        div submitLoginButton
+        <button type="button" name="loginButton" class="btn btn-primary" id="loginButton">Login</button>
         </div>
       </form>
+      </div>
     </div>
+  </div>
     <script src="./js/javascript.js">
     </script>
+
   </body>
 </html>
