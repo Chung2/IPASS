@@ -133,9 +133,6 @@ $("#rondeSluitenButton").click(function() {
   var minuten = tijd.slice(3, 5);
   var secondes = tijd.slice(6, 8);
 
-  console.log(uren);
-  console.log(minuten);
-  console.log(secondes);
   var dataTijd = {
     "uren": uren,
     "minuten": minuten,
@@ -200,6 +197,10 @@ $("#rondeOpslaanButton").click(function() {
 })
 
 $("#menuButton").click(function(){
+  var createroundsession = sessionStorage.getItem('nieuwRonde');
+  if(createroundsession !== null){
+    sessionStorage.removeItem('nieuwRonde');
+  }
   window.location.href ="/gameHistory/menu.html";
 })
 

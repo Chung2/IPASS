@@ -1,29 +1,33 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Menu</title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <script src="../js/checksession.js"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
-    <div class="container">
+
+<head>
+  <meta charset="utf-8">
+  <title>Menu</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/checksession.js"></script>
+  <link rel="stylesheet" href="../styles/masterStyles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
     <div id="adminMenu">
-    <h1>Offline game History</h1>
-    <div id="nieuwSpelToevoegen">
-      <button type="button" name="nieuwSpelButton" class="btn btn-primary" id="nieuwSpelButton">Nieuw Spel</button>
-      div rondeStart
-	</div>
-	<div id="spelVerwijderen">
-      <button type="button" name="verwijderenButton" class="btn btn-primary" id="verwijderenButton">Spel verwijderen</button>
-      div geschiedenis
+      <div id="titelRound">
+        <h1>Offline game History</h1>
       </div>
-      <div id="submitLogoutButton">
-      	<button type="button" id="logoutButton" class="btn btn-danger" name="logoutButton">Uitloggen</button>
-    </div>
+      <div id="nieuwSpelToevoegen">
+        <button type="button" name="nieuwSpelButton" class="btn btn-primary" id="nieuwSpelButton">Nieuw Spel</button>
+      </div>
+      <div id="spelVerwijderen">
+        <button type="button" name="verwijderenButton" class="btn btn-primary" id="verwijderenButton">Spel verwijderen</button>
+      </div>
+      <div id="submitLogoutButtonAdmin">
+        <button type="button" id="logoutButton" class="btn btn-danger" name="logoutButton">Uitloggen</button>
+      </div>
     </div>
     <script src="../js/javascript.js">
     </script>
   </div>
-  </body>
+</body>
+
 </html>
