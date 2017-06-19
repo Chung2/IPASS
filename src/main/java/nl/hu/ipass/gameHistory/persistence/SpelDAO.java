@@ -27,7 +27,9 @@ public class SpelDAO extends BaseDAO {
 			spellen.add(new Spel(rs.getInt("id_spel"), rs.getString("naam"), rs.getString("Instructies"),
 					rondeDAO.getRondesBySpelID(rs.getInt("id_spel"))));
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return spellen;
 
 	}
@@ -45,7 +47,9 @@ public class SpelDAO extends BaseDAO {
 			spel = new Spel(rs.getInt("id_spel"), rs.getString("naam"), rs.getString("Instructies"),
 					rondeDAO.getRondesBySpelID(id));
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return spel;
 	}
 
@@ -61,7 +65,9 @@ public class SpelDAO extends BaseDAO {
 		while (rs.next()) {
 			spel = new Spel(rs.getInt("id_spel"), rs.getString("naam"), rs.getString("Instructies"));
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return spel;
 	}
 
@@ -78,7 +84,9 @@ public class SpelDAO extends BaseDAO {
 			gelukt = true;
 			stmt.close();
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return gelukt;
 	}
 
@@ -91,15 +99,17 @@ public class SpelDAO extends BaseDAO {
 		stmt.setString(1, spel.getNaam());
 		stmt.setString(2, spel.getInstructies());
 		int rs = stmt.executeUpdate();
-		
-		if(rs > 0){
+
+		if (rs > 0) {
 			gelukt = true;
 			stmt.close();
+			if (con != null) {
+				con.close();
+			}
 		}
-		
-		con.close();
+
 		return gelukt;
-		
+
 	}
 
 }

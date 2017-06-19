@@ -1,14 +1,10 @@
 package nl.hu.ipass.gameHistory.persistence;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import javax.management.RuntimeErrorException;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class BaseDAO {

@@ -29,6 +29,7 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
 		con.close();
+		System.out.println(con.isClosed());
 		return rondes;
 	}
 
@@ -49,6 +50,7 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
 		con.close();
+		System.out.println(con.isClosed());
 		return ronde;
 	}
 
@@ -68,6 +70,7 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
 		con.close();
+		System.out.println(con.isClosed());
 		return ronde;
 	}
 
@@ -87,7 +90,9 @@ public class RondeDAO extends BaseDAO {
 					rs.getString("naam"), spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return rondes;
 	}
 
@@ -103,14 +108,15 @@ public class RondeDAO extends BaseDAO {
 		while (rs.next()) {
 			rondes.add(rs.getInt("id_ronde"));
 		}
-		con.close();
+		if (con != null) {
+			con.close();
+		}
 		return rondes;
 	}
 
 	public boolean insertResultaatRonde(Ronde ronde) throws SQLException {
 		Ronde laatsteronde = laatsteRonde();
 
-		Connection con = super.getConnection();
 		SpelerDAO spelerdao = new SpelerDAO();
 		boolean gelukt = false;
 
@@ -119,6 +125,8 @@ public class RondeDAO extends BaseDAO {
 		ArrayList<Speler> spelerLijstObj = spelerdao.getSpelersByNamen(ronde.getDeelnemersNamen());
 
 		for (Speler spelerObj : spelerLijstObj) {
+			Connection con = super.getConnection();
+
 			PreparedStatement stmt = con.prepareStatement(queryInsertResultaat);
 
 			stmt.setInt(1, spelerObj.getId_speler());
@@ -129,12 +137,13 @@ public class RondeDAO extends BaseDAO {
 			if (rs > 0) {
 				gelukt = true;
 				stmt.close();
+				con.close();
 			} else {
+				con.close();
 				break;
 			}
 
 		}
-		con.close();
 		return gelukt;
 
 	}

@@ -123,10 +123,10 @@ public class SpelerDAO extends BaseDAO {
 			
 			ResultSet rs = pstmt.executeQuery();
 			
-			if (rs.next())
+			if (rs.next()){
 				rol = rs.getString("rol");
-				
-		con.close();
+				con.close();
+			}
 		return rol;
 	}
 	
