@@ -200,10 +200,12 @@ public class RondeResource {
 	public Response updatePostRound(InputStream is) throws SQLException, IOException {
 		RondeService service = ServiceProvider.getRondeService();
 		JsonObject object = Json.createReader(is).readObject();
-
+		
 		String notities = object.getString("notities");
 		String winnaar = object.getString("winnaar");
 
+		System.out.print(notities);
+		
 		int winnaarFix = Integer.parseInt(winnaar);
 		Ronde laatsteronde = service.getLaatsteRonde();
 		laatsteronde.setNotities(notities);

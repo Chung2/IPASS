@@ -107,6 +107,7 @@ public class SpelerDAO extends BaseDAO {
 				deelnemers.add(getSpeler(idSpeler));
 			}
 		}
+		con.close();
 		return deelnemers;
 	}
 	

@@ -114,7 +114,6 @@ public class SpelResource {
 		
 		String naam = object.getString("naam");
 		String instructies = object.getString("Instructies");
-		System.out.println(instructies);
 		
 		Spel nieuwSpel = new Spel(999,naam,instructies);
 			

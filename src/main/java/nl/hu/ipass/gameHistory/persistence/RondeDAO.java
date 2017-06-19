@@ -189,7 +189,7 @@ public class RondeDAO extends BaseDAO {
 		Ronde laatsteronde = laatsteRonde();
 		boolean gelukt = false;
 
-		String updateQuery = "UPDATE ronde SET notities = ? where id_ronde = ?";
+		String updateQuery = "UPDATE ronde SET notities = ? WHERE id_ronde = ?";
 
 		PreparedStatement stmt = con.prepareStatement(updateQuery);
 		stmt.setString(1, ronde.getNotities());
