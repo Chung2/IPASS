@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Geschiedenis</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+     <script src="./js/checksession.js"></script>
      <script>
      $(document).ready(function(){
        $.getJSON("./rest/rondes/",function(rondeData){
@@ -17,18 +19,26 @@
           });
      });
      </script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
+  <div class="container">
   <div id="geschiedenis">
   	<h1>Offline game History</h1>
   	<div id="geschiedenisTable">
-      <input type="text" name="searchBarWinnaars" id="searchBarWinnaars" placeholder="Zoek naar de winnaars!">
-  		<table id = "resultaten">
+      <input type="text" class="form-control" name="searchBarWinnaars" id="searchBarWinnaars" placeholder="Zoek naar de winnaars!">
+      <div class="table-responsive">
+      <table id = "resultaten" class="table table-hover">
         <tr><th> Ronde nummer </th><th> Ronde naam </th><th> Spel </th><th> tijd </th><th> winnaar </th><th> notities </th><th> Deelnemers </th></tr>
   		</table>
   	</div>
   </div>
+    <div id="submitMenuButton">
+      <button type="button" id="menuButton" class="btn btn-primary" name="menuButton">Terug menu!</button>
+    </div>
+  </div>
   <script src="./js/javascript.js">
   </script>
+</div>
   </body>
 </html>

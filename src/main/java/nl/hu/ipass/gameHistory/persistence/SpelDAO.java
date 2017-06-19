@@ -48,13 +48,13 @@ public class SpelDAO extends BaseDAO {
 		con.close();
 		return spel;
 	}
-	
-	//getRondeBySpelId
+
+	// getRondeBySpelId
 	public Spel spelByIdForRonde(int id) throws SQLException {
 		Connection con = super.getConnection();
 
 		Spel spel = null;
-		String selectQuery = "SELECT id_spel,naam, instructies FROM spel WHERE ?";
+		String selectQuery = "SELECT id_spel,naam, instructies FROM spel WHERE id_spel = ?";
 		PreparedStatement stmt = con.prepareStatement(selectQuery);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
@@ -65,19 +65,41 @@ public class SpelDAO extends BaseDAO {
 		return spel;
 	}
 
-	public Spel updateSpel(Spel spel) throws SQLException {
+	public Boolean deleteSpel(Spel spel) throws SQLException {
 		Connection con = super.getConnection();
 
+		Boolean gelukt = false;
+		String queryDelete = "DELETE FROM spel where id_spel = ?";
+
+		PreparedStatement stmt = con.prepareStatement(queryDelete);
+		stmt.setInt(1, spel.getId_spel());
+		int rs = stmt.executeUpdate();
+		if (rs > 0) {
+			gelukt = true;
+			stmt.close();
+		}
 		con.close();
-		return spel;
+		return gelukt;
 	}
 
-	public Spel insertSpel(Spel spel) throws SQLException {
+	public Boolean insertSpel(Spel spel) throws SQLException {
 		Connection con = super.getConnection();
 
+		boolean gelukt = false;
+		String queryInsert = "INSERT INTO spel ( naam , instructies)VALUES( ? , ?)";
+		PreparedStatement stmt = con.prepareStatement(queryInsert);
+		stmt.setString(1, spel.getNaam());
+		stmt.setString(2, spel.getInstructies());
+		int rs = stmt.executeUpdate();
+		
+		if(rs > 0){
+			gelukt = true;
+			stmt.close();
+		}
+		
 		con.close();
-
-		return spel;
+		return gelukt;
+		
 	}
 
 }

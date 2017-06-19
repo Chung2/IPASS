@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Menu</title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Menu</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./js/checksession.js">
+  </script>
+  <link rel="stylesheet" href="./styles/masterStyles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
     <div id="spelerMenu">
-    <h1>Offline game History</h1>
-    <div id="rondeSart">
-      <button type="button" name="rondeStartenButton" id="rondeStartenButton">Nieuwe ronde</button>
-      div rondeStart
-	</div>
-	<div id="geschiedenis">
-      <button type="button" name="geschiedenisButton" id="geschiedenisButton">Geschiedenis</button>
-      div geschiedenis
-      </div>
+      <div id="titel">
+      <h1>Offline game History</h1>
     </div>
-    <script src="./js/javascript.js">
-    </script>
-  </body>
+      <div id="rondeStart">
+        <button type="button" class="btn btn-primary" name="rondeStartenButton" id="rondeStartenButton">Nieuwe ronde</button>
+      </div>
+      <div id="geschiedenis">
+        <button type="button" class="btn btn-primary" name="geschiedenisButton" id="geschiedenisButton">Geschiedenis</button>
+      </div>
+      <div id="submitLogoutButton">
+        <button type="button" class="btn btn-danger" id="logoutButton" name="logoutButton">Uitloggen</button>
+      </div>
+      <script src="./js/javascript.js">
+      </script>
+    </div>
+  </div>
+</body>
+
 </html>

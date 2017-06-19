@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Spel verwijderen</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/checksession.js"></script>
+    <script>
+    $(document).ready(function(){
+      $.getJSON("../rest/spellen",function(spellenData){
+          $.each(spellenData, function(v, n) {
+            var spelNaam = n.naam;
+            var stringNaam = spelNaam.toString();
+             $("#gameTable").append("<tr><td>"+n.id_spel+"</td><td>"+n.naam+"</td><td>"+n.Instructies+"</td><td><button type=button class=btn btn-danger id=deleteButton name=button onclick=deleteButton("+n.id_spel+",'"+encodeURIComponent(n.naam)+"')>"+n.naam+" verwijderen!</button></td></tr>");
+                  });
+         });
+    });
+    </script>
+    <link rel="stylesheet" href="../styles/masterStyles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+    <div id="deleteGameContainer">
+      <h1>Offline game History</h1>
+    <div id="titel">
+     Verwijderen game
+   </div>
+     <div id="gameTabeldiv">
+       <table id="gameTable" class="table table-hover">
+         <tr><th> ID spel </th><th> Spel naam </th><th> Instructies </th><th> verwijderen </th></tr>
+       </table>
+     </div>
+     <div id="submitAdminMenuButton">
+       <button type="button" id="menuAdminButton" class="btn btn-primary" name="menuAdminButton">Terug menu!</button>
+     </div>
+   </div>
+ </div>
+     <script src="../js/javascript.js">
+     </script>
+  </body>
+</html>

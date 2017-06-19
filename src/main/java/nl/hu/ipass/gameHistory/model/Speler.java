@@ -8,13 +8,15 @@ public class Speler {
 	private String naam;
 	private String wachtwoord;
 	private ArrayList<Integer> rondes;
+	private String rol;
 	
-	public Speler(int id_speler, String naam, String wachtwoord, ArrayList<Integer> rondes) {
+	public Speler(int id_speler, String naam, String wachtwoord, ArrayList<Integer> rondes, String rol) {
 		super();
 		this.id_speler = id_speler;
 		this.naam = naam;
 		this.wachtwoord = wachtwoord;
 		this.rondes = rondes;
+		this.rol = rol;
 	}
 
 	public int getId_speler() {
@@ -47,6 +49,14 @@ public class Speler {
 
 	public void setRondes(ArrayList<Integer> rondes) {
 		this.rondes = rondes;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	@Override

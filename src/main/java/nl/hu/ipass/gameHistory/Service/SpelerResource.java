@@ -2,6 +2,7 @@ package nl.hu.ipass.gameHistory.Service;
 
 import java.sql.SQLException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -32,7 +33,7 @@ public class SpelerResource {
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("id_gebruiker", spelerObj.getId_speler());
 			job.add("naam", spelerObj.getNaam());
-			job.add("wachtwoord", spelerObj.getWachtwoord());
+			//job.add("wachtwoord", spelerObj.getWachtwoord());
 			for (Integer r : spelerObj.getRondes()) {
 				rJob.add("id_ronde", r);
 				
@@ -59,7 +60,7 @@ public class SpelerResource {
 		
 		job.add("id_gebruiker", spelerObj.getId_speler());
 		job.add("naam", spelerObj.getNaam());
-		job.add("wachtwoord", spelerObj.getWachtwoord());
+		//job.add("wachtwoord", spelerObj.getWachtwoord());
 		for (Integer r : spelerObj.getRondes()) {
 			
 			rJob.add("id_ronde", r);

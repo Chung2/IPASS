@@ -32,13 +32,13 @@ public class SpelerDAO extends BaseDAO {
 		Connection con = super.getConnection();
 
 		ArrayList<Speler> spelers = new ArrayList<Speler>();
-		String querySelect = "SELECT id_speler,naam,wachtwoord FROM Speler";
+		String querySelect = "SELECT id_speler,naam,wachtwoord,rol FROM Speler";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
 			spelers.add(new Speler(rs.getInt("id_speler"), rs.getString("naam"), rs.getString("wachtwoord"),
-					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler"))));
+					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")),rs.getString("rol")));
 		}
 		con.close();
 		return spelers;
@@ -49,14 +49,14 @@ public class SpelerDAO extends BaseDAO {
 		Connection con = super.getConnection();
 
 		Speler speler = null;
-		String querySelect = "SELECT id_speler,naam, wachtwoord FROM Speler WHERE id_speler = ?";
+		String querySelect = "SELECT id_speler,naam, wachtwoord, rol FROM Speler WHERE id_speler = ?";
 		PreparedStatement stmt = con.prepareStatement(querySelect);
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
 			speler = new Speler(rs.getInt("id_speler"), rs.getString("naam"), rs.getString("wachtwoord"),
-					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")));
+					rondedao.getRondeIdByGebruikerId(rs.getInt("id_speler")),rs.getString("rol"));
 		}
 		con.close();
 		return speler;
@@ -86,9 +86,48 @@ public class SpelerDAO extends BaseDAO {
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()){
-			winnaar = getSpeler(id);
+			winnaar = getSpeler(rs.getInt("winnaar"));
 		}
 		con.close();
 		return winnaar;
 	}
+	
+	public ArrayList<Speler> getSpelersByNamen(ArrayList<String> deelnemersNamen) throws SQLException{
+		
+		Connection con = super.getConnection();
+		ArrayList<Speler> deelnemers = new ArrayList<Speler>();
+		String querySelect = "SELECT id_speler FROM speler where naam = ?";
+		
+		for(String s : deelnemersNamen){
+			PreparedStatement stmt = con.prepareStatement(querySelect);
+			stmt.setString(1, s);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				int idSpeler = rs.getInt("id_speler");
+				deelnemers.add(getSpeler(idSpeler));
+			}
+		}
+		con.close();
+		return deelnemers;
+	}
+	
+	public String findRolForNaamAndWachtwoord(String username, String password) throws SQLException{
+		
+		Connection con = super.getConnection();
+		String rol = null;
+		String querySelect = "SELECT rol FROM speler WHERE naam = ? AND wachtwoord = ?";
+		
+			PreparedStatement pstmt = con.prepareStatement(querySelect);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next())
+				rol = rs.getString("rol");
+				
+		con.close();
+		return rol;
+	}
+	
 }

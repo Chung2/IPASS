@@ -1,0 +1,153 @@
+
+#titelIndex{
+	margin-right:35%;
+	margin-left:35%;
+}
+
+#submitLoginButton{
+	padding-left:30%;
+}
+
+
+
+/*menu.html*/
+#titel{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#spelerMenu{
+  margin-left: 33%;
+}
+
+#rondeStart{
+  margin-left: 18%;
+  margin-right:18%;
+}
+
+#geschiedenis{
+  margin-left: 18%;
+  margin-right: 18%;
+}
+
+#rondeStartenButton{
+  margin-top: 5%;
+}
+
+#submitLogoutButton{
+  margin-left:19.5%;
+  margin-right:19.5%;
+}
+
+#geschiedenisButton{
+  margin-top: 5%;
+}
+
+#logoutButton{
+  margin-top: 5%;
+}
+
+
+/*createround.html*/
+#titelRound{
+  margin-right: 20%;
+  margin-left: 36%;
+}
+
+#rondeNaamContainer{
+    margin-left: 43%;
+    margin-right: 42%;
+
+}
+
+#rondeNaamButton{
+  margin-left:19%;
+  margin-right:19%;
+}
+
+
+/*selectgame.html*/
+
+.col-xs-4{
+  margin-left: 34%;
+}
+
+#spelSelecterenButton{
+  margin-top: 5%;
+  margin-left: 25%;
+}
+
+#spellen{
+margin-bottom: 5%;
+}
+
+/*selectplayers.html*/
+.col-xs-3{
+  margin-left: 37%;
+}
+
+#selecterenSpelersButton{
+  margin-left: 2%;
+}
+
+/*round.html*/
+#naamRonde{
+  margin-left:47%;
+  margin-bottom: 2%;
+}
+
+#stopWatchTijd{
+  margin-left: 46%;
+  margin-bottom: 2%;
+}
+
+#naamSpel{
+  margin-left: 47%;
+  margin-bottom: 2%;
+}
+
+#rondeSluitenButton{
+  margin-left: 47%;
+}
+
+/*postround.html*/
+.col-xs-2{
+  margin-left:42%;
+  margin-bottom:2%;
+}
+
+#rondeOpslaanButton{
+  margin-top:5%;
+  margin-left:44%;
+}
+
+/*adminmenu.html*/
+#nieuwspelButton{
+  margin-left: 45%;
+  margin-right:0%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+#verwijderenButton{
+  margin-left: 44%;
+  margin-right: 0%;
+  margin-bottom: 2%;
+}
+
+#submitLogoutButtonAdmin{
+  margin-left:46%;
+  margin-right:45%;
+}
+
+/*addgame.html*/
+#submitToevoegenGameButton{
+  margin-top: 5%;
+  margin-left: 44%;
+}
+
+/*deletegame.html*/
+#menuAdminButton{
+  margin-left: 44%;
+  margin-top: 2%;
+}
