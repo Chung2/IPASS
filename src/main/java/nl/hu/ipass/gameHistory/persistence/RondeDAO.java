@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import nl.hu.ipass.gameHistory.model.Ronde;
 import nl.hu.ipass.gameHistory.model.Speler;
 
-public class RondeDAO extends BaseDAO {
+public class RondeDAO extends BaseDAOLocal {
 
 	public ArrayList<Ronde> alleRondes() throws SQLException {
 

@@ -8,7 +8,7 @@ $("#loginButton").click(function(){
 
   $.post("./rest/authentication",loginData, function(response){
     window.sessionStorage.setItem("sessionToken",response);
-    window.location.href ="/gameHistory/menu.html";
+    window.location.href ="/menu.html";
   }).fail(function(jqXHR, textStatus, errorThrown){
     console.log(textStatus);
     console.log(errorThrown);
@@ -17,25 +17,25 @@ $("#loginButton").click(function(){
 
 //menu speler
 $("#rondeStartenButton").click(function() {
-  window.location.href = "/gameHistory/createround.html";
+  window.location.href = "/createround.html";
 })
 
 $("#geschiedenisButton").click(function() {
-  window.location.href = "/gameHistory/history.html";
+  window.location.href = "/history.html";
 })
 
 $("#logoutButton").click(function(){
   window.sessionStorage.removeItem('sessionToken');
-  window.location.href ="/gameHistory/index.html"
+  window.location.href ="/index.html"
 })
 
 //menu admin
 $("#verwijderenButton").click(function() {
-  window.location.href = "/gameHistory/admin/deletegame.html"
+  window.location.href = "/admin/deletegame.html"
 })
 
 $("#nieuwSpelButton").click(function() {
-  window.location.href = "/gameHistory/admin/addgame.html"
+  window.location.href = "/admin/addgame.html"
 })
 
 //pagina createround
@@ -63,7 +63,7 @@ $("#rondeNaamButton").click(function() {
           "naam": rondeNaam
         }
         sessionStorage.setItem("nieuwRonde", JSON.stringify(dataRonde));
-        window.location.href = "/gameHistory/selectgame.html";
+        window.location.href = "/selectgame.html";
       }
     });
   }
@@ -83,7 +83,7 @@ $("#spelSelecterenButton").click(function() {
     var fusionObj = jQuery.extend(rondeObj, spel);
     sessionStorage.removeItem("nieuwRonde");
     sessionStorage.setItem("nieuwRonde", JSON.stringify(fusionObj));
-    window.location.href = "/gameHistory/selectplayers.html";
+    window.location.href = "/selectplayers.html";
   }
 })
 
@@ -116,7 +116,7 @@ $("#selecterenSpelersButton").click(function() {
          },
         success: function(response) {
           sessionStorage.removeItem("nieuwRonde");
-          window.location.href = "/gameHistory/round.html";
+          window.location.href = "/round.html";
         },
         error: function(response) {
           alert("Ronde aanmaken is mislukt!");
@@ -153,7 +153,7 @@ $("#rondeSluitenButton").click(function() {
       },
       success: function(response) {
         console.log("succes!");
-        window.location.href = "/gameHistory/postround.html";
+        window.location.href = "/postround.html";
       },
       error: function(response) {
         console.log("error!");
@@ -186,7 +186,7 @@ $("#rondeOpslaanButton").click(function() {
       success: function(response) {
         console.log("succes!");
         setTimeout(function() {
-          window.location.href = "/gameHistory/history.html"
+          window.location.href = "/history.html"
         }, 2000);
       },
       error: function(response) {
@@ -201,11 +201,11 @@ $("#menuButton").click(function(){
   if(createroundsession !== null){
     sessionStorage.removeItem('nieuwRonde');
   }
-  window.location.href ="/gameHistory/menu.html";
+  window.location.href ="/menu.html";
 })
 
 $("#menuAdminButton").click(function(){
-  window.location.href ="/gameHistory/admin/adminmenu.html";
+  window.location.href ="/admin/adminmenu.html";
 })
 
 //pagina addgame
@@ -254,7 +254,7 @@ $("#toevoegenGameButton").click(function() {
             alert("Het spel " + nieuwSpel + " is niet toegevoegd!");
           }
         });
-        //window.location.href = "/gameHistory/selectgame.html";
+        //window.location.href = "/selectgame.html";
       }
     });
   }
