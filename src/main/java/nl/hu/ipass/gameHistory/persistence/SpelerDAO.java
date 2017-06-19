@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import nl.hu.ipass.gameHistory.model.Speler;
 import nl.hu.ipass.gameHistory.model.Test;
 
-public class SpelerDAO extends BaseDAOLocal {
+public class SpelerDAO extends BaseDAO {
 	
 	private RondeDAO rondedao = new RondeDAO();
 	
