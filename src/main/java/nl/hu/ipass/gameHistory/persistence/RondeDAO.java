@@ -28,8 +28,8 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
+		stmt.close();
 		con.close();
-		System.out.println(con.isClosed());
 		return rondes;
 	}
 
@@ -49,8 +49,8 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
+		stmt.close();
 		con.close();
-		System.out.println(con.isClosed());
 		return ronde;
 	}
 
@@ -69,8 +69,8 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getDeelnemersByRonde(rs.getInt("id_ronde")), rs.getTime("tijd"),
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities"));
 		}
+		stmt.close();
 		con.close();
-		System.out.println(con.isClosed());
 		return ronde;
 	}
 
@@ -91,6 +91,7 @@ public class RondeDAO extends BaseDAO {
 					spelerdao.getWinnaarByRondeId(rs.getInt("id_ronde")), rs.getString("notities")));
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return rondes;
@@ -109,6 +110,7 @@ public class RondeDAO extends BaseDAO {
 			rondes.add(rs.getInt("id_ronde"));
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return rondes;

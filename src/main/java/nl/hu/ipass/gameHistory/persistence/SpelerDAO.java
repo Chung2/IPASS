@@ -24,6 +24,7 @@ public class SpelerDAO extends BaseDAO {
 		while(rs.next()){
 			testArray.add(new Test(rs.getInt("id"),rs.getString("naam")));
 		}
+		stmt.close();
 		con.close();
 		return testArray;
 	}
@@ -74,6 +75,7 @@ public class SpelerDAO extends BaseDAO {
 		while (rs.next()) {
 			deelnemers.add(getSpeler(rs.getInt("id_speler")));
 		}
+		stmt.close();
 		con.close();
 		return deelnemers;
 	}
@@ -88,6 +90,7 @@ public class SpelerDAO extends BaseDAO {
 		while (rs.next()){
 			winnaar = getSpeler(rs.getInt("winnaar"));
 		}
+		stmt.close();
 		con.close();
 		return winnaar;
 	}
@@ -105,7 +108,8 @@ public class SpelerDAO extends BaseDAO {
 			while(rs.next()){
 				int idSpeler = rs.getInt("id_speler");
 				deelnemers.add(getSpeler(idSpeler));
-			}
+			
+				stmt.close();}
 		}
 		con.close();
 		return deelnemers;
@@ -125,8 +129,10 @@ public class SpelerDAO extends BaseDAO {
 			
 			if (rs.next()){
 				rol = rs.getString("rol");
+				pstmt.close();
 				con.close();
 			}
+			
 		return rol;
 	}
 	

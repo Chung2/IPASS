@@ -28,6 +28,7 @@ public class SpelDAO extends BaseDAO {
 					rondeDAO.getRondesBySpelID(rs.getInt("id_spel"))));
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return spellen;
@@ -48,6 +49,7 @@ public class SpelDAO extends BaseDAO {
 					rondeDAO.getRondesBySpelID(id));
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return spel;
@@ -66,6 +68,7 @@ public class SpelDAO extends BaseDAO {
 			spel = new Spel(rs.getInt("id_spel"), rs.getString("naam"), rs.getString("Instructies"));
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return spel;
@@ -85,6 +88,7 @@ public class SpelDAO extends BaseDAO {
 			stmt.close();
 		}
 		if (con != null) {
+			stmt.close();
 			con.close();
 		}
 		return gelukt;
