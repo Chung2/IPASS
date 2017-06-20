@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 	<Resource name="jdbc/PostgresDS"
-		url="jdbc:postgresql://localhost:5432/ipass"
+		url="jdbc:postgresql://ec2-54-75-249-162.eu-west-1.compute.amazonaws.com:5432/d72joqv2h0o7ie"
 		driverClassName="org.postgresql.Driver"
 		auth="Container"
 		type="javax.sql.DataSource"
-		username="postgres"
-		password="root"/>
+		username="ndynjxzrgsbzmm"
+		password="b30cc35f51f7c69ac9b8dd02fa7185c29bfe325fd39b7e6a87df06e2bbe675fe"/>
 </Context>
