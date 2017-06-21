@@ -1,3 +1,5 @@
+/*DAO voert alle queries uit door de tabel speler en haalt of voert informatie in/uit
+ * */
 package nl.hu.ipass.gameHistory.persistence;
 
 import java.sql.Connection;
@@ -12,7 +14,7 @@ import nl.hu.ipass.gameHistory.model.Test;
 public class SpelerDAO extends BaseDAO {
 	
 	private RondeDAO rondedao = new RondeDAO();
-	
+	//method return arrayList Test, voor testing
 	public ArrayList<Test> getTest() throws SQLException{
 		Connection con = super.getConnection();
 
@@ -28,6 +30,7 @@ public class SpelerDAO extends BaseDAO {
 		return testArray;
 	}
 
+	//method return arrayList Speler, maakt gebruik van getRondeIdByGebruikerId uit rondedao
 	public ArrayList<Speler> alleSpelers() throws SQLException {
 		Connection con = super.getConnection();
 
@@ -45,6 +48,7 @@ public class SpelerDAO extends BaseDAO {
 
 	}
 
+	//method return Speler door middel van id_speler,maakt gebruik van getRondeIdByGebruikerId uit rondedao
 	public Speler getSpeler(int id) throws SQLException {
 		Connection con = super.getConnection();
 
@@ -62,6 +66,7 @@ public class SpelerDAO extends BaseDAO {
 		return speler;
 	}
 
+	//method return arrayList deelnemers/speler, door middel van id_ronde maakt gebruik van getSpeler method uit SpelerDAO
 	public ArrayList<Speler> getDeelnemersByRonde(int id) throws SQLException {
 		
 		Connection con = super.getConnection();
@@ -78,6 +83,7 @@ public class SpelerDAO extends BaseDAO {
 		return deelnemers;
 	}
 	
+	//method return Speler/winnaar door middel van id_ronde, maakt gebruik van getSpeler method uit SpelerDAO
 	public Speler getWinnaarByRondeId(int id)throws SQLException{
 		Connection con = super.getConnection();
 		Speler winnaar = null;
@@ -92,6 +98,7 @@ public class SpelerDAO extends BaseDAO {
 		return winnaar;
 	}
 	
+	//method return arrayList Speler door middel van namen maakt gebruik van method getSpeler uit SpelerDAO
 	public ArrayList<Speler> getSpelersByNamen(ArrayList<String> deelnemersNamen) throws SQLException{
 		
 		Connection con = super.getConnection();
@@ -111,6 +118,7 @@ public class SpelerDAO extends BaseDAO {
 		return deelnemers;
 	}
 	
+	//method return String rol door middel van username en password, nodig voor inloggen
 	public String findRolForNaamAndWachtwoord(String username, String password) throws SQLException{
 		
 		Connection con = super.getConnection();

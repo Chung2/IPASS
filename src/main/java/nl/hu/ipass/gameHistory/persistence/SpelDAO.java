@@ -1,3 +1,6 @@
+/*DAO voert alle queries uit door de tabel spel en haalt of voert informatie in/uit
+ * */
+
 package nl.hu.ipass.gameHistory.persistence;
 
 import java.sql.Connection;
@@ -12,6 +15,7 @@ import nl.hu.ipass.gameHistory.model.Spel;
 
 public class SpelDAO extends BaseDAO {
 
+	//method return arrayList alle spellen maakt gebruik van getRondesBySpelID uit rondedao
 	public ArrayList<Spel> alleSpellen() throws SQLException {
 
 		Connection con = super.getConnection();
@@ -32,6 +36,7 @@ public class SpelDAO extends BaseDAO {
 
 	}
 
+	//method return Spel door middel van spel id maakt gebruik van getRondesBySpelID uit rondedao
 	public Spel spelById(int id) throws SQLException {
 		Connection con = super.getConnection();
 		RondeDAO rondeDAO = new RondeDAO();
@@ -49,7 +54,7 @@ public class SpelDAO extends BaseDAO {
 		return spel;
 	}
 
-	// getRondeBySpelId
+	//method return spel object door middel van id_spel voor ronde object
 	public Spel spelByIdForRonde(int id) throws SQLException {
 		Connection con = super.getConnection();
 
@@ -65,6 +70,7 @@ public class SpelDAO extends BaseDAO {
 		return spel;
 	}
 
+	//method return boolean of het gelukt is om spel te verwijderen
 	public Boolean deleteSpel(Spel spel) throws SQLException {
 		Connection con = super.getConnection();
 
@@ -82,6 +88,7 @@ public class SpelDAO extends BaseDAO {
 		return gelukt;
 	}
 
+	//method return boolean of het gelukt is om spel toe tevoegen
 	public Boolean insertSpel(Spel spel) throws SQLException {
 		Connection con = super.getConnection();
 

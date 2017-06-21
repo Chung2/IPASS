@@ -10,6 +10,8 @@ $("#loginButton").click(function(){
     window.sessionStorage.setItem("sessionToken",response);
     window.location.href ="/gameHistory/menu.html";
   }).fail(function(jqXHR, textStatus, errorThrown){
+	$("#naam").css("border","2px solid red");
+	$("#wachtwoord").css("border","2px solid red");
     console.log(textStatus);
     console.log(errorThrown);
   });
@@ -162,7 +164,7 @@ $("#rondeSluitenButton").click(function() {
   }
 })
 
-//pagina posround
+//pagina postround
 $("#rondeOpslaanButton").click(function() {
   var winnaar = $("#winnaar").val();
   var winnaarKiezen = $("#winnaar option:selected").text();

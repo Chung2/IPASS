@@ -25,15 +25,16 @@ public class AuthenticationResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response authenticateUser(@FormParam("naam") String naam, @FormParam("wachtwoord") String wachtwoord) throws SQLException{
 		
+		//zoekt naar de rol van de speler
 		try{
 			SpelerDAO spelerdao = new SpelerDAO();
 			String role = spelerdao.findRolForNaamAndWachtwoord(naam, wachtwoord);
-
+			//als rol leeg is dan user not found
 			if(role == null){throw new IllegalArgumentException("No user Found!");}
-			
+			//token is 2 uur lang geldig
 			Calendar expiration = Calendar.getInstance();
 			expiration.add(Calendar.HOUR, 2);
-			
+			//krijgt naam mee, de rol en de tijd en wordt gewikkeld in een encryptie taal en stuurt door naar frontend
 			String token = Jwts.builder()
 					.setSubject(naam)
 					.claim("role",role)

@@ -1,3 +1,6 @@
+/*DAO voert alle queries uit door de tabel ronde/resultaat en haalt of voert informatie in/uit
+ * */
+
 package nl.hu.ipass.gameHistory.persistence;
 
 import java.sql.Connection;
@@ -11,7 +14,8 @@ import nl.hu.ipass.gameHistory.model.Ronde;
 import nl.hu.ipass.gameHistory.model.Speler;
 
 public class RondeDAO extends BaseDAO {
-
+	
+	//method return arrayList alle rondes uit database maakt gebruik van getDeelnemersByRonde, getWinnaarByRondeId, spelById uit de spelersDAO en spelDAO
 	public ArrayList<Ronde> alleRondes() throws SQLException {
 
 		Connection con = super.getConnection();
@@ -32,6 +36,7 @@ public class RondeDAO extends BaseDAO {
 		return rondes;
 	}
 
+	//method return ronde uit database door middel van id, maakt gebruik van getDeelnemersByRonde, getWinnaarByRondeId, spelById uit de spelersDAO en spelDAO
 	public Ronde rondeById(int id) throws SQLException {
 		Connection con = super.getConnection();
 		SpelDAO speldao = new SpelDAO();
@@ -52,6 +57,7 @@ public class RondeDAO extends BaseDAO {
 		return ronde;
 	}
 
+	//method return ronde die laatst gespeeld is, maakt gebruik van getDeelnemersByRonde, getWinnaarByRondeId, spelById uit de spelersDAO en spelDAO
 	public Ronde laatsteRonde() throws SQLException {
 		Connection con = super.getConnection();
 		SpelDAO speldao = new SpelDAO();
@@ -71,6 +77,7 @@ public class RondeDAO extends BaseDAO {
 		return ronde;
 	}
 
+	//method return arraylist ronde door middel van spel id, maakt gebruik van getDeelnemersByRonde, getWinnaarByRondeId, spelById uit de spelersDAO en spelDAO
 	public ArrayList<Ronde> getRondesBySpelID(int id) throws SQLException {
 		Connection con = super.getConnection();
 		SpelDAO speldao = new SpelDAO();
@@ -91,6 +98,7 @@ public class RondeDAO extends BaseDAO {
 		return rondes;
 	}
 
+	//method return arrayList ronde door middel van spelers id
 	public ArrayList<Integer> getRondeIdByGebruikerId(int id) throws SQLException {
 		Connection con = super.getConnection();
 
@@ -107,6 +115,7 @@ public class RondeDAO extends BaseDAO {
 		return rondes;
 	}
 
+	//method return boolean of de query insert into resultaat gelukt is, id_speler, id_ronde en winnaar
 	public boolean insertResultaatRonde(Ronde ronde) throws SQLException {
 		Ronde laatsteronde = laatsteRonde();
 
@@ -138,7 +147,7 @@ public class RondeDAO extends BaseDAO {
 		return gelukt;
 
 	}
-
+	//method return boolean of de insert into query gelukt is, id_spel, tijd, notities en naam 
 	public boolean nieuwRonde(Ronde ronde) throws SQLException {
 
 		Connection con = super.getConnection();
@@ -162,6 +171,7 @@ public class RondeDAO extends BaseDAO {
 		return gelukt;
 	}
 
+	//method return boolean of de query update gelukt is, eindtijd
 	public boolean updateEindTijd(Ronde ronde) throws SQLException {
 
 		Connection con = super.getConnection();
@@ -183,6 +193,7 @@ public class RondeDAO extends BaseDAO {
 		return gelukt;
 	}
 
+	//method return booelean of de update query gelukt is
 	public boolean updateNotities(Ronde ronde) throws SQLException {
 
 		Connection con = super.getConnection();
@@ -205,6 +216,7 @@ public class RondeDAO extends BaseDAO {
 		return gelukt;
 	}
 
+	//method return boolean of de update query gelukt is, winnaar en voer ook de method updateNotities uit
 	public boolean updatePostRonde(Ronde ronde) throws SQLException {
 
 		Connection con = super.getConnection();

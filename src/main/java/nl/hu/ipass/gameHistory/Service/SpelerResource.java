@@ -1,3 +1,7 @@
+/*connectie tussen webapplicatie frontend en backend, hier krijgt het de informatie van de frontend en wordt het omgezet in object of er wordt
+ * een functie uitvoerd in de path /spelers
+ * */
+
 package nl.hu.ipass.gameHistory.Service;
 
 import java.sql.SQLException;
@@ -21,6 +25,7 @@ public class SpelerResource {
 
 	@GET
 	@Produces("application/json")
+	//method return string array of speler objecten in jsonformaat stuurt door naar de link /spelers
 	public String getSpelers() throws SQLException {
 
 		SpelerService service = ServiceProvider.getSpelerService();
@@ -50,6 +55,8 @@ public class SpelerResource {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
+	//method return string speler Object in jsonformaat stuurt door naar path /spelers/id
+
 	public String spelerById(@PathParam("id") int id) throws SQLException {
 		SpelerService service = ServiceProvider.getSpelerService();
 		Speler spelerObj = service.findSpelerById(id);
@@ -75,7 +82,7 @@ public class SpelerResource {
 	@GET
 	@Path("/testdatabase")
 	@Produces("application/json")
-
+	//method return string test Obect in jsonformaat stuurt door naar path /spellen/id voor testen
 	public String getTest() throws SQLException {
 
 		SpelerService service = ServiceProvider.getSpelerService();

@@ -19,14 +19,18 @@ import io.jsonwebtoken.Jwts;
 public class AuthenticationFilter implements ContainerRequestFilter{
 	@Override
 	public void filter(ContainerRequestContext requestCtx) throws IOException {
+		//gebruiker blijft gast enzij een geldige token ie meegegeven
 		boolean isSecure = requestCtx.getSecurityContext().isSecure();
 
 		MySecurityContext msc = new MySecurityContext("Unknown", "guest", isSecure);
 
+		//kijkt of de http AUTHORIZATION header correct is en aanwezig die hij krijgt via jquery
 		String authHeader = requestCtx.getHeaderString(HttpHeaders.AUTHORIZATION);
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			//haalt de token uit de http AUTHORIZATION header
 			String token = authHeader.substring("Bearer".length()).trim();
 
+			//als token geldig is dan anders error code
 			try {
 				JwtParser parser = Jwts.parser().setSigningKey(AuthenticationResource.key);
 				Claims claims = parser.parseClaimsJws(token).getBody();

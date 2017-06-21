@@ -1,3 +1,7 @@
+/*connectie tussen webapplicatie frontend en backend, hier krijgt het de informatie van de frontend
+ *  en wordt het omgezet in object of er wordt
+ * een functie uitvoerd in de path /spellen
+ * */
 package nl.hu.ipass.gameHistory.Service;
 
 import java.io.IOException;
@@ -32,6 +36,7 @@ public class RondeResource {
 	@SuppressWarnings("deprecation")
 	@GET
 	@Produces("application/json")
+	//method return string array of ronde objecten in jsonformaat stuurt door naar de link /rondes
 	public String alleRondes() throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -70,6 +75,7 @@ public class RondeResource {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
+	//method return string Ronde Object in jsonformaat stuurt door naar path /rondes/id
 	public String findRonde(@PathParam("id") int id) throws SQLException {
 		RondeService service = ServiceProvider.getRondeService();
 		Ronde rondeObj = service.getRondeById(id);
@@ -105,6 +111,7 @@ public class RondeResource {
 	@GET
 	@Path("/laatsteronde")
 	@Produces("application/json")
+	//method return string ronde Object in jsonformaat stuurt door naar path /rondes/laatsteronde
 	public String laatsteRonde() throws SQLException {
 
 		RondeService service = ServiceProvider.getRondeService();
@@ -142,6 +149,8 @@ public class RondeResource {
 	@Path("/newround")
 	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
+	//method return response krijgt string binnen van jquery in jsonformaat en zet het om in nieuwe ronde object
+
 	public Response addRonde(InputStream is) throws SQLException, IOException {
 
 		ArrayList<String> deelnemersNamen = new ArrayList<String>();
@@ -173,6 +182,8 @@ public class RondeResource {
 	@Path("/updateendtime")
 	@RolesAllowed({"admin","user"})
 	@Produces("application/json")
+	//method return response krijgt string binnen van jquery in jsonformaat en zet het om in ronde object voor eindtijd
+
 	public Response updateTime(InputStream is) throws SQLException, IOException {
 
 		RondeService service = ServiceProvider.getRondeService();
@@ -197,14 +208,14 @@ public class RondeResource {
 	@RolesAllowed({"admin","user"})
 	@Path("/updatepostround")
 	@Produces("application/json")
+	//method return response krijgt string binnen van jquery in jsonformaat en zet het om in ronde object en update postround
+
 	public Response updatePostRound(InputStream is) throws SQLException, IOException {
 		RondeService service = ServiceProvider.getRondeService();
 		JsonObject object = Json.createReader(is).readObject();
 		
 		String notities = object.getString("notities");
 		String winnaar = object.getString("winnaar");
-
-		System.out.print(notities);
 		
 		int winnaarFix = Integer.parseInt(winnaar);
 		Ronde laatsteronde = service.getLaatsteRonde();

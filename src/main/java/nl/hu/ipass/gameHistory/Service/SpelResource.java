@@ -1,3 +1,7 @@
+/*connectie tussen webapplicatie frontend en backend, hier krijgt het de informatie van de frontend
+ *  en wordt het omgezet in object of er wordt
+ * een functie uitvoerd in de path /spellen
+ * */
 package nl.hu.ipass.gameHistory.Service;
 
 import java.io.IOException;
@@ -29,6 +33,7 @@ public class SpelResource {
 	
 	@GET
 	@Produces("application/json")
+	//method return string array of spel objecten in jsonformaat stuurt door naar de link /spellen
 	public String allSpellen() throws SQLException{
 		SpelService service = ServiceProvider.getSpelService();
 		
@@ -62,6 +67,8 @@ public class SpelResource {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
+	//method return string spel Obect in jsonformaat stuurt door naar path /spellen/id
+
 	public String getSpel(@PathParam("id") int id) throws SQLException{
 		
 		SpelService service = ServiceProvider.getSpelService();
@@ -107,6 +114,7 @@ public class SpelResource {
 	@Path("/nieuwspel")
 	@RolesAllowed("admin")
 	@Produces("application/json")
+	//method return response krijgt string binnen van jquery in jsonformaat en zet het om in spel object
 	public Response addSpel(InputStream is) throws SQLException, IOException {
 
 		SpelService service = ServiceProvider.getSpelService();
@@ -125,6 +133,7 @@ public class SpelResource {
 	@DELETE
 	@RolesAllowed("admin")
 	@Path("/delete/{id}")
+	//method return response via jquery wordt deze method aangeroepen en verwijderd het Spel
 	public Response deleteCountry(@PathParam("id") int id) throws SQLException {
 		SpelService service = ServiceProvider.getSpelService();
 
